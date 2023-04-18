@@ -1,3 +1,36 @@
 body {
-    background-color: black;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+color: #fff;
+font-weight: 600;
+font-family: 'Courier New', Courier, monospace;
+}
+
+header ul {
+    list-style: none;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.me {
+  flex: 0%;
+  float: right;
+  justify-content: right;
+  transform: scaleX(-1);
+}
+.me img {
+  width: 530px;
+}
+
+.text {
+  width: 100vw;
+  height: 50vh;
+  background-image: linear-gradient(to right, black, grey);
 }
