@@ -1,28 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FL</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FL</title>
+        <link rel="stylesheet" href="style.css">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<body>
-    <header>
-        <ul>
-            <li>Home</li>
-            <li>About me</li>
-            <li>Contact me</li>
-        </ul>
-    </header>
-    <div class="content">
-        <div class="me">
-            <img src="/img/20221210_162335354-removebg-preview.png" alt="farhad" id="me">
+    </head>
+
+    <body>
+        <header>
+            <ul>
+                <li><a onclick="hoverEf(0)" id="home">Home</a></li>
+                <li><a href="#project-info" onclick="hoverEf(1)" id="project">Projects</a></li>
+                <li><a href="#contact-info" onclick="hoverEf(2)" id="contact">Contact</a></li>
+                <li><a href="#about-info" onclick="hoverEf(3)" id="about">About</a></li>
+                <li style="padding: 0; float: left;"></li>
+                <a href="#home" style="padding: 0; margin:5px; float: right;"><img
+                        src="img/cd.svg" height="35"></a>
+            </ul>
+        </header>
+        <main>
+            <div class="flip-card" id="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+    
+                        <section id="home-page" class="1">
+                            <div class="content">
+                                <div id="iteam1">
+                                    <br><br><br><br>
+                                    <div class="row-outer">
+                                        <div class="container">
+                                            <div class="animated-heading">
+                                                <h1>Hi i'm a <span id="words">Farhad
+                                                        Lafarie</span></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="iteam2">
+                                    <div id="test"><img src="/img/me.png"
+                                            alt="farhad"></div>
+                                </div>
+                            </div>
+                            <div id="grad" class="hidden"></div>
+                        </section>
+    
+                        <section id="about-info" class="hidden">
+                            <h1 class="sub-title">About Me</h1><br>
+                            <h2 id="about-me">Hi, I'm Farhad Lafarie, a passionate
+                                developer
+                                and content creator based in sri lanka. I love
+                                coding and sharing my knowlage with through Youtube
+                                videos.</h2>
+                            <a href="#about"></a>
+                        </section>
+    
+                        <!-- <div id="grad-2"></div> -->
+    
+                        <section id="project-info" class="hidden">
+                            <h1 class="sub-title">Projects</h1><br>
+                            <!-- make sure to update the project count -->
+                            <h2 id="project-text">Check out my lateset Projects. I've
+                                worked
+                                in 1+ Projects and 1+ hackthon events and all
+                                Projects has listed
+                                down.</h2><br><br>
+    
+                            <div class="center">
+                                <div class="project-iteams">
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                    <div class="tag iteams">
+                                        <div class="iteams-image"><img
+                                                src="/img/fluttur.png"
+                                                alt="project-image"
+                                                height="150px"></div>
+                                        <h3>Project title</h3>
+                                        <p>Description: </p>
+                                        <p>Tecnologies: HTML, CSS, JavaScript</p>
+                                        <a href target="_blank">Live Demo</a>
+                                        <a href target="_blank">GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                        </section>
+                        <!-- check this -->
+                        <section id="Youtube-info" class="hidden">
+                            <h2 class="sub-title">YouTube</h2>
+                            <div class="Youtube-video">
+                                <!-- iframe -->
+                            </div>
+                        </section> 
+                        <section>
+                            <form   action="contact-form.php" id="form"  class="hidden" >
+                                <div id="contact-info">
+                                <div class="box">
+                                    <h2 class="sub-title">Contact</h2>
+                                </div><br><br>
+                                <label for="name">Name: </label>
+                                <input type="text" id="name" name="name"
+                                    placeholder="Whats your Name" required><br><br>
+                                <label for="email">Email: </label>
+                                <input type="text" id="email" name="email"
+                                    placeholder="Whats your Email address" required><br><br>
+                                <label for="country">Country</label>
+                                <select id="country" name="country">
+                                    <option value="australia">Australia</option>
+                                    <option value="canada">Canada</option>
+                                    <option value="usa">USA</option>
+                                </select><br>
+                                <label for="message">Message: </label>
+                                <textarea type="text" id="message" name="message"
+                                    rows="4" cols="50"
+                                    placeholder="Enter your message here" required></textarea><br><br>
+                                <input type="submit" value="Submit">
+                            </div>
+                            </form>
+                        </section>
+    
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>Wait A Momment...</h1>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 600px;background-color: red;"></div>
+        </main>
+        <div class="footer">
+            <a href="#home">Back to top</a>
+            <p>&copy; 2023 Farhad Lafarie. All Rights Reserved.</p>
         </div>
-        <div class="text"></div>
-    </div>
-</body>
+        
+    </body>
+    <footer>
+        
+        
+    </footer>
+    <script src="script.js"></script>
 
 </html>

@@ -1,36 +1,387 @@
-body {
-  background-color: black;
+* {
+  /* background-color: black; */
   margin: 0;
   padding: 0;
+  color: white;
 }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+}
+
+main {
+  flex: 1; 
+}
+
+.hidden {
+  display: none;
+
+}
+
+.opacity {
+  /* opacity: 0; */
+  background-color: none;
+  /* background-color: rgba(255, 255, 255, 0) ; */
+}
+
 
 header {
-color: #fff;
-font-weight: 600;
-font-family: 'Courier New', Courier, monospace;
+  color: wheat;
+  font-weight: 600;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-header ul {
-    list-style: none;
+/* navbar */
+ul {
+  border-radius: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 90vw;
+  overflow: hidden;
+  background-color: wheat;
+  align-items: center;
 }
 
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 16px 16px;
+  text-decoration: none;
+  text-shadow: #010101;
+}
+
+li a:hover:not(.active) {
+  background-color: white;
+}
+
+.active {
+  animation-delay: 5ms;
+  border-radius: 10px;
+  background-color: #04aa6d;
+}
+
+/* body */
+h1 {
+  color: #4b00ff;
+  font-weight: 400;
+}
+
+.sub-title {
+  font-weight: bold;
+  text-align: center;
+  font-size: 44px;
+}
+
+/* template */
+
+.content>div {
+  /* text-align: center; */
+  font-size: 30px;
+}
+
+.content>#iteam1 {
+  grid-area: iteam1;
+  /* background-color: red; */
+}
+
+.content>#iteam2 {
+  grid-area: iteam2;
+  /* background-color: red; */
+}
+
+/* 
+content 1 */
 .content {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-areas:
+    "iteam1 iteam2"
+    ". iteam2"
+    ". iteam2";
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  min-height: calc(100vh - 70px);
+}
+
+/* 
+items inside the grid */
+
+.content img {
+  /* background-color: red; */
+  height: 609px;
+  float: right;
+  transform: scaleX(-1);
+  max-height: 70%;
+  max-width: 160%;
+  width: auto;
+}
+
+/* best for mobile */
+#test {
+  transform: translateX(0vw) translateY(-3vh);
+}
+
+/* 
+about css */
+
+#about-info {
+  color: red;
+  height: 250px;
+  background-color: blue;
+}
+
+.sub-title {
+  color: burlywood;
+}
+
+h2,
+h1,
+.info {
+  margin-left: 5vw;
+}
+
+#about-me {
+  float: right;
+  margin: 0 30vw 0 10vw;
+}
+
+.animated-heading {
+  display: flex;
+  text-align: left;
+  padding-left: 10vw;
+  margin: auto;
+}
+
+span#words {
+  font-weight: bolder;
+}
+
+/* projects css */
+
+#project-info {
+  align-items: center;
+  /* height: 50vh; */
+}
+
+#project-text {
+  text-align: center;
+}
+
+.project-iteams {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
-.me {
-  flex: 0%;
-  float: right;
-  justify-content: right;
-  transform: scaleX(-1);
-}
-.me img {
-  width: 530px;
+.iteams {
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+  height: 250px;
+  background: linear-gradient(180deg, #010101, #0000ff);
+  border-radius: 10px;
 }
 
-.text {
-  width: 100vw;
-  height: 50vh;
-  background-image: linear-gradient(to right, black, grey);
+.iteams-image {
+  /* background-image: url('/img/icon.svg'); */
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
+
+.iteams a {
+  bottom: 0;
+  background-color: red;
+}
+
+/* .center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} */
+
+/* test gradient */
+#grad {
+  height: 5vh;
+  background: #010101;
+  background: linear-gradient(180deg, #010101, #0000ff);
+}
+
+
+#grad-2 {
+  height: 5vh;
+  background: #010101;
+  background: linear-gradient(0deg, #010101, #0000ff);
+}
+
+
+/* contact info */
+
+#contact-info {
+  
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
+  color: black;
+}
+
+.box {
+  width: 100%;
+  padding: 15px 0 15px 0 ;
+  background-color: black;
+  border-radius: 10px;
+}
+
+input[type=text],
+select {
+  width: 100%;
+  height: 6vh;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: black;
+}
+
+textarea {
+  width: 100%;
+  height: 10vh;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: black;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 15px 0 15px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+  
+}
+
+label {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+/* flip card */
+
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  min-height: 100vh;
+  perspective: 90vw;
+  margin-right: 20px;
+  height: auto;
+}
+
+.flip-card-back h1 {
+  text-align: center;
+  color: white;
+  margin-top: 40px;
+  font-size: 2rem;
+}
+
+.flip-card-inner {
+  position: relative;
+  /* margin-top: 100px; */
+  width: 100%;
+  height: 100%;
+  /* text-align: center; */
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.hover-left .flip-card-inner {
+  transform: rotateY(180deg);
+  transition-delay: 0.6s;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); */
+}
+
+.hover-right .flip-card-inner{
+  transform: rotateY(-180deg);
+  transition-delay: 0.6s;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4); */
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  /* background-color: #2c2d31; */
+  color: white;
+}
+
+.flip-card-back {
+  /* background-color: #2c2d31; */
+  /* backdrop-filter: brightness(45%); */
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.student{
+  align-items: center;
+  margin: auto;
+}
+
+/* :end */
+
+.footer {
+  text-align: center;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+/* animation */
+
+.tag {
+  opacity: 0;
+  transform: translate(0, 10vh);
+  transition: all 1s;
+}
+
+.tag.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* :end */
