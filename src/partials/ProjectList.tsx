@@ -16,10 +16,9 @@ const ProjectList = () => (
   >
     <div className="flex flex-col gap-6">
       <Project
-        name="Project 1"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-        bibendum. Nunc non posuere consectetur, justo erat semper enim, non
-        hendrerit dui odio id enim."
+        name="AIdcuator"
+        description="I led a yearlong group project to develop a 3D eLearning platform from scratch. We used React.js for the front end and
+        Node.js for the back end. Integrating multiple APIs and frameworks like OpenAI and Google model view."
         link="/"
         img={{
           src: '/assets/images/project-web-design.png',
