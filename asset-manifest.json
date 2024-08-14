@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/FarhadLafarie/static/css/main.8efeafd5.css",
-    "main.js": "/FarhadLafarie/static/js/main.74436481.js",
-    "static/js/453.1407b060.chunk.js": "/FarhadLafarie/static/js/453.1407b060.chunk.js",
+    "main.css": "/FarhadLafarie/static/css/main.7b429ee5.css",
+    "main.js": "/FarhadLafarie/static/js/main.64b968a0.js",
+    "static/js/453.ddb4850c.chunk.js": "/FarhadLafarie/static/js/453.ddb4850c.chunk.js",
     "static/media/me.png": "/FarhadLafarie/static/media/me.6275d945ca983995fba9.png",
     "index.html": "/FarhadLafarie/index.html",
-    "main.8efeafd5.css.map": "/FarhadLafarie/static/css/main.8efeafd5.css.map",
-    "main.74436481.js.map": "/FarhadLafarie/static/js/main.74436481.js.map",
-    "453.1407b060.chunk.js.map": "/FarhadLafarie/static/js/453.1407b060.chunk.js.map"
+    "main.7b429ee5.css.map": "/FarhadLafarie/static/css/main.7b429ee5.css.map",
+    "main.64b968a0.js.map": "/FarhadLafarie/static/js/main.64b968a0.js.map",
+    "453.ddb4850c.chunk.js.map": "/FarhadLafarie/static/js/453.ddb4850c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8efeafd5.css",
-    "static/js/main.74436481.js"
+    "static/css/main.7b429ee5.css",
+    "static/js/main.64b968a0.js"
   ]
 }
