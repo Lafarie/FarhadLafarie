@@ -267,6 +267,7 @@ table {
 }
 
 .item-info li {
+  list-style-type: none;
   font-size: 0.875em;
 }
 
@@ -310,6 +311,10 @@ table {
   border-bottom: 1px dashed #000;
   margin-left: 5px;
   font-size: 0.875em;
+}
+
+.project-date{
+  display: flex;
 }
 
 .size-875 {

@@ -73,7 +73,7 @@ function Home() {
           </ul>
           <div className=" border-t border-gray-200 dark:border-gray-600 p-4">
             <div className={`${activeTab === "stats" ? "" : "hidden"} p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800`}>
-                            <dl className="flex flex-col sm:flex-row items-center justify-center gap-8 p-4 mx-auto text-gray-900 dark:text-white sm:p-8 text-center max-w-screen-xl">
+              <dl className="flex flex-col sm:flex-row items-center justify-center gap-8 p-4 mx-auto text-gray-900 dark:text-white sm:p-8 text-center max-w-screen-xl">
                 <div className="flex flex-col items-center justify-center">
                   <dt className="mb-2 text-3xl font-extrabold">10+</dt>
                   <dd className="text-gray-500 dark:text-gray-400 text-1xl">Projects</dd>
@@ -141,8 +141,9 @@ function Home() {
 
       {/* projects */}
 
-      <div id="projects" className="min-h-screen mt-18 p-10 pt-28 dark:bg-gray-800 dark:border-gray-700">
+      <div id="projects" className="min-h-screen mt-18 p-10 dark:bg-gray-800 dark:border-gray-700">
         {/* Responsive grid setup */}
+        <h2 className="mb-10 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Projects</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <div class="max-w-sm max-h-fit bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="https://aiducator.vercel.app/">
@@ -172,7 +173,7 @@ function Home() {
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">UniConnect 2024</h5>
               </a>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                This is a ongoing project to help all type students and lecturers connect in place and share your knowlage and help each other. here what we used <b>Flutter</b>
+                This is a ongoing project to help all type students and lecturers connect in place and share your knowlage and help each other. here what I used <b>Flutter</b>
               </p>
             </div>
           </div>
@@ -185,7 +186,7 @@ function Home() {
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">WhatsApp bot 2022</h5>
               </a>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                This is a small project to create a bot for whatsapp. here what we used <b>Node.js</b>
+                This is a small project to create a bot for whatsapp. here what I used <b>Node.js</b>
               </p>
             </div>
           </div>
@@ -198,7 +199,7 @@ function Home() {
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Telegram bot 2022</h5>
               </a>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                This is a small project to create a bot for Telegram. here what we used <b>Python</b>
+                This is a small project to create a bot for Telegram. here what I used <b>Python</b>
               </p>
             </div>
           </div>
@@ -208,10 +209,10 @@ function Home() {
             </a>
             <div class="p-5">
               <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">WordPress bot 2021</h5>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">WordPress 2021</h5>
               </a>
               <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                This movie share website build using WordPress. here what we used <b>WordPress</b>
+                This movie share website build using WordPress. here what I used <b>WordPress</b>
               </p>
             </div>
           </div>
