@@ -24,6 +24,11 @@
         .print-header {
           background-color: #000 !important;
           color: black !important;
+        -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        .print-header * {
+          color: white !important;
         }
       }
     </style>
