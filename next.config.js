@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   // Static export for GitHub Pages
-  output: 'export',
+  output: 'standalone',
   // Temporarily disabled for development - uncomment for GitHub Pages deployment
   // basePath: process.env.NODE_ENV === 'production' ? '/FarhadLafarie' : '',
   // assetPrefix: process.env.NODE_ENV === 'production' ? '/FarhadLafarie/' : '',
