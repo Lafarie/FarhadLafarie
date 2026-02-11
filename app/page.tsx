@@ -274,7 +274,7 @@ function Home(): ReactNode {
       title: "Ticket Portal 2025",
       description:
         "A full-stack event ticketing platform with QR-based entry, real-time dashboards, and mobile apps for iOS and Android. Built with Next.js, Prisma, PostgreSQL, and Docker, deployed via GitLab CI/CD.",
-      image: "https://i.ibb.co/zWwvqkFZ/Screenshot-2025-06-10-at-10-45-33-PM.png",
+      image: "https://i.ibb.co/hJ7126s9/Screenshot-12-2-2026-01334-ticket-hsenidmobile-com.jpg",
       link: "https://ticket.rush.lk",
       status: "Completed",
       tech: ["Next.js", "Prisma", "PostgreSQL", "Docker", "React Native", "GitLab CI/CD"],
@@ -284,7 +284,7 @@ function Home(): ReactNode {
       title: "Sheet Ninja 2025",
       description:
         "A developer productivity tool that converts GitLab project data into formatted Excel reports. Built with Next.js, TypeScript, Prisma, and Docker for streamlined project tracking.",
-      image: "https://i.ibb.co/CpgTvnbd/Screenshot-2025-06-10-at-10-46-20-PM.png",
+      image: "https://tobias-sell.com/wp-content/uploads/2020/10/header.jpg",
       link: "https://github.com/Lafarie/Sheet-Ninja",
       status: "Completed",
       tech: ["Next.js", "TypeScript", "Prisma", "Docker", "GitLab API"],
