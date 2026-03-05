@@ -402,7 +402,7 @@ function Home(): ReactNode {
               >
                 <div className="opacity-80 hover:opacity-100 transition-opacity duration-500 flex items-center justify-center h-full">
                   <Image
-                    className="translate-y-16 translate-x-5 hover:translate-y-12 transition-transform duration-500 object-contain"
+                    className="translate-y-14 translate-x-2 hover:translate-y-8 transition-transform duration-500 object-contain"
                     src={me}
                     alt="Farhad Lafarie profile picture"
                     fill={false}
