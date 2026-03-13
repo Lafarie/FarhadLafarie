@@ -22,20 +22,17 @@
           text-decoration: none;
         }
         .print-header {
-          background-color: #000 !important;
+          /* background-color: #000 !important; */
           color: black !important;
         -webkit-print-color-adjust: exact !important;
           print-color-adjust: exact !important;
-        }
-        .print-header * {
-          color: white !important;
         }
       }
     </style>
   </head>
   <body class="font-sans leading-6 text-gray-700 text-sm bg-white" style="font-family: Arial, sans-serif; font-size: 14px">
     <!-- Header Section -->
-    <section class="bg-gray-800 text-white text-center print-header">
+    <section class=" text-black text-center print-header">
       <div class="px-5 py-0">
         <div class="text-center">
           <h1 class="text-5xl font-bold mb-0" style="letter-spacing: 5px; padding: 0">Farhad Lafarie</h1>
@@ -49,37 +46,37 @@
               <td>
                 <div class="flex items-center">
                   <img src="https://cdn-icons-png.flaticon.com/128/483/483947.png" alt="Phone" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(0.8)" />
-                  <a href="tel:+94776350933" class="text-white text-xs hover:text-blue-300">+94 77 635 0933</a>
+                  <a href="tel:+94776350933" class="text-black text-xs hover:text-blue-300">+94 77 635 0933</a>
                 </div>
               </td>
               <td>
                 <div class="flex items-center ml-3">
                   <img src="https://cdn-icons-png.flaticon.com/128/3177/3177361.png" alt="Address" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(0.8)" />
-                  <p class="text-white text-xs">Dehiwala 10350, Sri Lanka</p>
+                  <p class="text-black text-xs">Dehiwala 10350, Sri Lanka</p>
                 </div>
               </td>
               <td>
                 <div class="flex items-center ml-3">
                   <img src="https://cdn-icons-png.flaticon.com/128/542/542689.png" alt="Email" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(0.8)" />
-                  <a href="mailto:farhadlafarie@gmail.com" class="text-white text-xs hover:text-blue-300">farhadlafarie@gmail.com</a>
+                  <a href="mailto:farhadlafarie@gmail.com" class="text-black text-xs hover:text-blue-300">farhadlafarie@gmail.com</a>
                 </div>
               </td>
               <td>
                 <div class="flex items-center ml-3">
                   <img src="https://cdn-icons-png.flaticon.com/128/3536/3536569.png" alt="LinkedIn" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(0.8)" />
-                  <a href="https://www.linkedin.com/in/farhad-lafarie/" class="text-white text-xs hover:text-blue-300">in/farhad-lafarie</a>
+                  <a href="https://www.linkedin.com/in/farhad-lafarie/" class="text-black text-xs hover:text-blue-300">in/farhad-lafarie</a>
                 </div>
               </td>
               <td>
                 <div class="flex items-center ml-3">
-                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968810.png" alt="GitHub" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(1)" />
-                  <a href="https://github.com/Lafarie" class="text-white text-xs hover:text-blue-300">git/lafarie</a>
+                        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968810.png" alt="GitHub" class="w-3 h-3 mr-1" style="" />
+                  <a href="https://github.com/Lafarie" class="text-black text-xs hover:text-blue-300">git/lafarie</a>
                 </div>
               </td>
               <td>
                 <div class="flex items-center ml-3">
                   <img src="https://cdn-icons-png.flaticon.com/256/1006/1006771.png" alt="Website" class="w-3 h-3 mr-1" style="filter: invert(1) brightness(0.8)" />
-                  <a href="https://farhad-lafarie.vercel.app/" class="text-white text-xs hover:text-blue-300">portfolio</a>
+                  <a href="https://farhad-lafarie.vercel.app/" class="text-black text-xs hover:text-blue-300">portfolio</a>
                 </div>
               </td>
             </tr>
@@ -89,7 +86,7 @@
     </section>
 
     <!-- Main Content -->
-    <div class="flex px-5 py-0 mx-auto">
+    <div class="flex px-5 py-0 mx-auto ">
       <div class="flex-1 bg-white p-0">
         <!-- Summary Section -->
         <section class="mb-0">
@@ -153,12 +150,15 @@
             <div class="flex justify-between items-start">
               <h4 class="text-sm font-bold text-gray-600 uppercase mt-1 mb-0"><b>Ticket Portal - </b>Event Ticketing Platform (<a href="https://ticket.rush.lk/" class="text-blue-600 hover:underline lowercase" style="color: #046bfb">ticket.rush.lk</a>)</h4>
               <div class="flex">
-                <p class="text-sm text-gray-700">2025</p>
+                <p class="text-sm text-gray-700">2025 - Present</p>
               </div>
             </div>
             <ul class="pl-4 mb-0" style="margin-left: 0">
+              <p class="text-base text-gray-700 mb-0">Affiliated with hSenid Mobile Solutions.</p>
+            
               <li class="text-sm text-gray-700 list-none mb-0">Architected a production ticketing platform hosting 5+ live events, generating $3000+ in ticket sales, containerized with Docker and deployed via streamlined GitLab CI/CD pipelines, achieving zero-downtime releases for 1000+ paying customers.</li>
-              <li class="text-sm text-gray-700 list-none mb-0">Published the app to Android and iOS stores, enhancing cross-platform functionality with React Native.</li>
+              <li class="text-sm text-gray-700 list-none mb-0">Built and published the Android Ticket Validator app for this ecosystem using React Native (<a href="https://play.google.com/store/apps/details?id=lk.rush.appigo.ticketvalidator" class="text-blue-600 hover:underline lowercase" style="color: #046bfb">play store</a>).</li>
+              <li class="text-sm text-gray-700 list-none mb-0">Published the mobile apps to Android and iOS stores, enhancing cross-platform functionality with React Native.</li>
               <li class="text-sm text-gray-500 font-bold list-none mb-0" style="font-size: 14px; font-weight: 700; color: gray">Skill Used: Next.js, Prisma, PostgreSQL, Docker, GitLab CI/CD, Tailwind CSS, React Native, Monorepo Architecture</li>
             </ul>
           </div>
@@ -178,21 +178,23 @@
 
 
           <!-- Project 2 -->
-          <div class="ml-0 mb-0">
+          <div class="ml-0 mb-0 mt-10 ">
             <div class="flex justify-between items-start">
               <h4 class="text-sm font-bold text-gray-600 uppercase mt-1 mb-0"><b>appiGo Retailer - </b>eCommerce Website Builder (<a href="https://appigo.co/stores/" class="text-blue-600 hover:underline lowercase" style="color: #046bfb">appigo.co/stores</a>)</h4>
               <div class="flex">
                 <p class="text-sm text-gray-700">2024 - Present</p>
               </div>
             </div>
+            
             <ul class="pl-4 mb-0" style="margin-left: 0">
+              <li class=""><p class="text-base text-gray-700 mb-0">Affiliated with hSenid Mobile Solutions.</p></li>
               <li class="text-sm text-gray-700 list-none mb-0">Architected containerized build pipeline with Docker (2-5 containers) for production eCommerce platform, delivering 2 release builds monthly across staging and production environments with 99.9% uptime; optimized Apache web server configuration, reducing response time by 35% and supporting 50,000+ concurrent requests per minute.</li>
               <li class="text-sm text-gray-500 font-bold list-none mb-0" style="font-size: 14px; font-weight: 700; color: gray">Skill Used: Docker, GitLab CI/CD, Apache, Linux, Bash, Build Automation</li>
             </ul>
           </div>
 
           <!-- Project 3 -->
-          <div class="ml-0 mt-10 mb-0">
+          <div class="ml-0 mb-0">
             <div class="flex justify-between items-start">
               <h4 class="text-sm font-bold text-gray-600 uppercase mt-1 mb-0"><b>AIducator - </b>AI-Powered 3D eLearning Platform (<a href="https://aiducator.vercel.app/" class="text-blue-600 hover:underline lowercase" style="color: #046bfb">live demo</a>)</h4>
               <div class="flex">
@@ -218,6 +220,24 @@
               </div>
             </div>
             <div class="flex justify-between items-center mb-0">
+              <li class="text-sm text-gray-700 ml-4 list-disc">Learning Kubernetes - LinkedIn</li>
+              <div class="ml-auto font-bold text-sm">
+                <p class="text-sm">2026</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-0">
+              <li class="text-sm text-gray-700 ml-4 list-disc">DevOps Foundations: Infrastructure as Code - LinkedIn</li>
+              <div class="ml-auto font-bold text-sm">
+                <p class="text-sm">2026</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-0">
+              <li class="text-sm text-gray-700 ml-4 list-disc">Microsoft Certified: Azure AI Fundamentals (AI-900)</li>
+              <div class="ml-auto font-bold text-sm">
+                <p class="text-sm">2025</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-0">
               <li class="text-sm text-gray-700 ml-4 list-disc">NASA Space Apps Challenge - Global Nominee</li>
               <div class="ml-auto font-bold text-sm">
                 <p class="text-sm">2024</p>
@@ -230,15 +250,21 @@
               </div>
             </div>
             <div class="flex justify-between items-center mb-0">
-              <li class="text-sm text-gray-700 ml-4 list-disc">Problem Solving International Hackathon - University of Westminster</li>
+              <li class="text-sm text-gray-700 ml-4 list-disc">Problem Solving International Hackathon 2024 - University of Westminster</li>
               <div class="ml-auto font-bold text-sm">
                 <p class="text-sm">2024</p>
               </div>
             </div>
             <div class="flex justify-between items-center mb-0">
-              <li class="text-sm text-gray-700 ml-4 list-disc">CodeSprint - IEEE</li>
+              <li class="text-sm text-gray-700 ml-4 list-disc">CodeSprint 7.0 - IEEE Computer Society Student Branch Chapter of IIT</li>
               <div class="ml-auto font-bold text-sm">
-                <p class="text-sm">2023 & 2024</p>
+                <p class="text-sm">2024</p>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-0">
+              <li class="text-sm text-gray-700 ml-4 list-disc">SkillUp - Professional Development Programme - Leo Club of IIT</li>
+              <div class="ml-auto font-bold text-sm">
+                <p class="text-sm">2023</p>
               </div>
             </div>
           </ul>
@@ -263,22 +289,25 @@
             <!-- Hard Skills -->
             <div class="flex-1">
               <h4 class="text-sm font-bold text-black mb-0">Hard Skills</h4>
-              <ul class="pl-5 mb-0" style="padding-left: 20px">
-                <li class="text-sm text-gray-700 p-0" style="font-size: 0.9em">
-                  Technical Skills
-                  <ul class="pl-5" style="padding-left: 20px">
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Programming Languages:</b> Python, Bash, JavaScript, Java, PHP</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Frameworks:</b> React, React Native, Next.js, Node.js, Express.js, FastAPI, JAX-RS</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>DevOps & Cloud:</b> Docker, Kubernetes, GitLab CI/CD, AWS (EC2), Linux, Ansible</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Monitoring & Logging:</b> Grafana, Sentry</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Container & Orchestration:</b> Docker, Kubernetes, Docker Compose, Harbor, AWS</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>CI/CD Tools:</b> GitLab CI/CD, GitHub Actions</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Version Control:</b> Git, GitHub, GitLab, Git Workflows, Branching Strategies</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Databases:</b> PostgreSQL, MySQL, MongoDB, Prisma ORM</li>
-                    <li class="text-sm text-gray-700 ml-0" style="margin-left: 0"><b>Other:</b> REST API, Microservices, Firebase, GCP, Tailwind CSS, Figma</li>
-                  </ul>
-                </li>
-              </ul>
+              <div class="text-sm text-gray-700 mt-1 flex flex-wrap gap-x-3 gap-y-1" style="font-size: 0.9em">
+                <span><b>Programming Languages:</b> Python, Bash, JavaScript, Java, PHP</span>
+                <span>|</span>
+                <span><b>Frameworks:</b> React, React Native, Next.js, Node.js, Express.js, FastAPI, JAX-RS</span>
+                <span>|</span>
+                <span><b>DevOps & Cloud:</b> Docker, Kubernetes, GitLab CI/CD, AWS (EC2), Linux, Ansible</span>
+                <span>|</span>
+                <span><b>Monitoring & Logging:</b> Grafana, Sentry</span>
+                <span>|</span>
+                <span><b>Container & Orchestration:</b> Docker, Kubernetes, Docker Compose, Harbor, AWS</span>
+                <span>|</span>
+                <span><b>CI/CD Tools:</b> GitLab CI/CD, GitHub Actions</span>
+                <span>|</span>
+                <span><b>Version Control:</b> Git, GitHub, GitLab, Git Workflows, Branching Strategies</span>
+                <span>|</span>
+                <span><b>Databases:</b> PostgreSQL, MySQL, MongoDB, Prisma ORM</span>
+                <span>|</span>
+                <span><b>Other:</b> REST API, Microservices, Firebase, GCP, Tailwind CSS, Figma</span>
+              </div>
             </div>
           </div>
         </section>
@@ -289,13 +318,13 @@
           <div class="ml-5" style="margin-left: 20px">
             <ul class="mb-0">
               <div class="flex justify-between items-center mb-0">
-                <li class="text-sm text-gray-700 w-full list-disc">Problem Solving International Hackathon 24 by University of Westminster - Participation (100+ competitors)</li>
+                <li class="text-sm text-gray-700 w-full list-disc">Volunteered at the Rotary Club Sunshine Games with office colleagues, contributing to event operations and community engagement.</li>
                 <div class="ml-auto font-bold text-sm">
-                  <p class="text-sm">2024</p>
+                  <p class="text-sm">2025</p>
                 </div>
               </div>
               <div class="flex justify-between items-center mb-0">
-                <li class="text-sm text-gray-700 w-full list-disc">IIT CodeSprint – Guided a team of 5 engineers to Top 10 (out of 150+) teams</li>
+                <li class="text-sm text-gray-700 w-full list-disc">Participated in IEEEXtreme 18.0, a global 24-hour competitive programming challenge, together with Dhanuka Perera.</li>
                 <div class="ml-auto font-bold text-sm">
                   <p class="text-sm">2024</p>
                 </div>
@@ -352,7 +381,7 @@
           font-weight: normal !important;
         }
         .print-header {
-          background-color: #000 !important;
+          /* background-color: #000 !important; */
           color: black !important;
         }
         .text-gray-500 {
