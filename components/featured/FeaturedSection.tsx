@@ -8,6 +8,7 @@ import { LowPolyBackground } from "@/components/background/LowPolyBackground";
 import { ModePersonImage } from "./ModePersonImage";
 import { ModeTabs } from "./ModeTabs";
 import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function FeaturedSection() {
   const { modeConfig } = useMode();
@@ -49,7 +50,14 @@ export function FeaturedSection() {
       <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
 
       <div className="section-reveal relative isolate z-20 flex w-full max-w-lg flex-col items-center gap-8">
-        <p className="text-xs font-bold uppercase tracking-[0.28em] text-ink-faint">
+        <p
+          className={cn(
+            "text-xs font-bold uppercase tracking-[0.28em] transition-colors duration-500",
+            modeConfig.id === "devops" && "text-[#148062]",
+            modeConfig.id === "developer" && "text-[#8b4dc4]",
+            modeConfig.id === "content-creator" && "text-[#ff6b9d]"
+          )}
+        >
           {SITE.hero.modeEyebrow}
         </p>
 
@@ -57,19 +65,28 @@ export function FeaturedSection() {
 
         <ModePersonImage />
 
-        <div className="low-poly-panel max-w-md p-6 text-center">
-          <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            {modeConfig.tagline}
-          </h1>
-          <p className="mt-5 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
-          <ul className="mt-4 flex flex-wrap justify-center gap-2">
-            {modeConfig.highlights.map((line) => (
-              <li key={line} className="low-poly-chip">
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={modeConfig.id}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="low-poly-panel max-w-md p-6 text-center w-full"
+          >
+            <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              {modeConfig.tagline}
+            </h1>
+            <p className="mt-5 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
+            <ul className="mt-4 flex flex-wrap justify-center gap-2">
+              {modeConfig.highlights.map((line) => (
+                <li key={line} className="low-poly-chip">
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

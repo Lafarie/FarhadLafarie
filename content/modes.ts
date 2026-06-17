@@ -21,8 +21,8 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
     },
     highlights: [
       "GitLab CI/CD · Docker · Kubernetes",
-      "Ticket Portal — production deploy pipeline",
-      "Sheet Ninja — containerized dev tooling",
+      "Cloud Infrastructure & Deployments",
+      "Automation & Shell Scripting",
     ],
     featuredProjectIds: ["ticket-portal", "sheet-ninja"],
   },
@@ -46,8 +46,8 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
     },
     highlights: [
       "Next.js · React · TypeScript · Tailwind",
-      "Ticket Portal · Sheet Ninja · AIducator",
-      "End-to-end product delivery",
+      "Full-Stack Web & Mobile Development",
+      "Responsive UI & API Integrations",
     ],
     featuredProjectIds: ["ticket-portal", "sheet-ninja", "aiducator"],
   },
@@ -72,8 +72,8 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
     highlights: [
       "@officialJoelEditz — funny meme edits",
       "@Build2Learn — educational tech edits",
-      "Ticket Portal — event ticketing platform",
-      "Sheet Ninja — GitLab sync platform",
+      "eLearning & Technical Visual Design",
+      "Video Editing & Digital Storytelling",
     ],
     featuredProjectIds: ["joel-editz", "build-to-learn", "ticket-portal", "sheet-ninja"],
   },
