@@ -177,7 +177,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const waveRadius = RIPPLE_RADIUS * 1.25;
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 8000; // Slower, relaxed 8s sweep
+    const sweepDuration = 16000; // Slowed down to 16s sweep
 
     let lastCycle = -1;
     const variantRef = { current: VARIANTS[0] };
@@ -202,7 +202,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
 
       // Precompute animation parameters once per frame instead of inside loop
       const p1 = progress;
-      const p2 = (progress - 0.25 + 1.0) % 1.0;
+      const p2 = (progress - 0.125 + 1.0) % 1.0;
 
       let waveParam1 = 0;
       let waveParam2 = 0;
