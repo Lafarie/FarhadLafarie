@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useMode } from "@/context/ModeContext";
-import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ModePersonImage() {
@@ -10,15 +9,13 @@ export function ModePersonImage() {
 
   return (
     <div
-      className={cn(
-        "low-poly-character-frame relative mx-auto w-[min(90vw,22rem)] overflow-hidden",
-        "aspect-[4/5] sm:w-[min(70vw,20rem)]",
-      )}
+      className="low-poly-character-frame relative w-full overflow-hidden"
+      style={{ aspectRatio: "4/5" }}
     >
       <AnimatePresence mode="wait">
         <motion.div
           key={modeConfig.id}
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
@@ -30,7 +27,7 @@ export function ModePersonImage() {
             fill
             className="object-cover"
             priority
-            sizes="(max-width: 768px) 90vw, 320px"
+            sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 300px"
           />
         </motion.div>
       </AnimatePresence>

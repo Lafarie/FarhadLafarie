@@ -18,11 +18,7 @@ export function FeaturedSection() {
   const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
-    setSpot({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-      active: true,
-    });
+    setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
   }, []);
 
   const onPointerLeave = useCallback(() => {
@@ -34,7 +30,8 @@ export function FeaturedSection() {
       ref={sectionRef}
       id="featured"
       className={cn(
-        "snap-section relative flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-12 pt-24",
+        "snap-section relative flex min-h-[100dvh] flex-col items-center justify-center",
+        "px-4 pb-12 pt-24 sm:px-8 md:px-12",
         "mode-bg transition-colors duration-500",
       )}
       style={
@@ -51,23 +48,26 @@ export function FeaturedSection() {
 
       <div className="section-reveal relative isolate z-20 flex w-full max-w-5xl flex-col items-center gap-6">
 
-        {/* Mode eyebrow label — black, bold, larger */}
-        <p className="text-sm font-black uppercase tracking-[0.35em] text-ink">
+        {/* Mode eyebrow label */}
+        <p className="text-sm font-black uppercase tracking-[0.35em] text-red-600">
           {SITE.hero.modeEyebrow}
         </p>
 
         {/* Mode Tabs */}
         <ModeTabs />
 
-        {/* Side-by-side: Image + Detail Card */}
-        <div className="flex w-full flex-col items-center gap-6 lg:flex-row lg:items-stretch lg:gap-8">
+        {/* Side-by-side on lg+, stacked on mobile */}
+        <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-stretch lg:gap-0">
 
-          {/* Character Image */}
-          <div className="w-full max-w-xs shrink-0 lg:w-64 xl:w-72">
+          {/* Character Image — full width on mobile, fixed width on desktop */}
+          <div className="w-full max-w-[280px] shrink-0 sm:max-w-[300px] lg:w-[260px] lg:max-w-none xl:w-[300px]">
             <ModePersonImage />
           </div>
 
-          {/* Detail Card — fade only, no y-shift to avoid scroll reflow */}
+          {/* Divider spacing — visible only on desktop as a gap */}
+          <div className="hidden lg:block lg:w-8 xl:w-10 shrink-0" />
+
+          {/* Detail Card — fade only, no y-shift */}
           <AnimatePresence mode="wait">
             <motion.div
               key={modeConfig.id}
@@ -75,13 +75,15 @@ export function FeaturedSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="low-poly-panel flex-1 p-6 text-left"
+              className="low-poly-panel w-full flex-1 p-6 text-left sm:p-8 lg:p-8"
             >
-              <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              <h1 className="low-poly-heading text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-3xl">
                 {modeConfig.tagline}
               </h1>
-              <p className="mt-4 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <p className="mt-4 text-sm leading-relaxed text-ink-dim sm:text-base">
+                {modeConfig.intro}
+              </p>
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {modeConfig.highlights.map((line) => (
                   <li key={line} className="low-poly-chip">
                     {line}
@@ -90,6 +92,7 @@ export function FeaturedSection() {
               </ul>
             </motion.div>
           </AnimatePresence>
+
         </div>
 
       </div>
