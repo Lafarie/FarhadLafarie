@@ -458,3 +458,46 @@
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Custom range slider styling for settings panel */
+.low-poly-panel input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(36, 36, 36, 0.12); /* visible grey track */
+  border: 1.8px solid var(--color-line-strong);
+  border-radius: 6px;
+  height: 8px;
+  outline: none;
+  margin: 6px 0;
+}
+
+.low-poly-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: 1.8px solid var(--color-line-strong);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  margin-top: -1px; /* Center align webkit thumb on track */
+}
+
+.low-poly-panel input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.18);
+}
+
+.low-poly-panel input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-ink);
+  border: 1.8px solid var(--color-line-strong);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.low-poly-panel input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.18);
+}

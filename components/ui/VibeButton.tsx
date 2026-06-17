@@ -162,7 +162,7 @@ export function VibeButton() {
                     step={1}
                     value={scaleUnit}
                     onChange={(e) => updateSettings({ scaleUnit: parseInt(e.target.value) })}
-                    className="w-full accent-grape bg-base-2 h-1 rounded-lg appearance-none cursor-pointer"
+                    className="w-full cursor-pointer"
                   />
                 </div>
 
@@ -179,7 +179,7 @@ export function VibeButton() {
                     step={10}
                     value={rippleRadius}
                     onChange={(e) => updateSettings({ rippleRadius: parseInt(e.target.value) })}
-                    className="w-full accent-grape bg-base-2 h-1 rounded-lg appearance-none cursor-pointer"
+                    className="w-full cursor-pointer"
                   />
                 </div>
 
@@ -196,7 +196,7 @@ export function VibeButton() {
                     step={1}
                     value={maxLift}
                     onChange={(e) => updateSettings({ maxLift: parseInt(e.target.value) })}
-                    className="w-full accent-grape bg-base-2 h-1 rounded-lg appearance-none cursor-pointer"
+                    className="w-full cursor-pointer"
                   />
                 </div>
 
