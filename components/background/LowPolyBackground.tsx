@@ -19,6 +19,21 @@ type CubeSlot = { id: string; x: number; y: number; zIndex: number };
 
 type CubeCache = { element: HTMLElement; centerX: number; centerY: number };
 
+type WaveVariant =
+  | "left-to-right"
+  | "right-to-left"
+  | "top-left-to-bottom-right"
+  | "circle-out"
+  | "circle-in";
+
+const VARIANTS: WaveVariant[] = [
+  "left-to-right",
+  "right-to-left",
+  "top-left-to-bottom-right",
+  "circle-out",
+  "circle-in"
+];
+
 function buildCubeGrid(width: number, height: number): CubeSlot[] {
   const cols = Math.ceil(width / X_STEP) + 2;
   const rows = Math.ceil(height / Y_STEP) + 3;
@@ -58,14 +73,58 @@ function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number
   return { lift: ease * MAX_LIFT, ease };
 }
 
-function getEffectForWave(cube: CubeCache, waveX: number, radius: number) {
-  const dist = Math.abs(cube.centerX - waveX);
+function getWaveDistance(
+  cube: CubeCache,
+  variant: WaveVariant,
+  progress: number,
+  width: number,
+  height: number,
+  waveRadius: number
+): number {
+  if (variant === "left-to-right") {
+    const startX = -waveRadius;
+    const endX = width + waveRadius;
+    const waveX = startX + progress * (endX - startX);
+    return Math.abs(cube.centerX - waveX);
+  }
 
-  if (dist >= radius) return { lift: 0, ease: 0 };
+  if (variant === "right-to-left") {
+    const startX = width + waveRadius;
+    const endX = -waveRadius;
+    const waveX = startX + progress * (endX - startX);
+    return Math.abs(cube.centerX - waveX);
+  }
 
-  const factor = 1 - dist / radius;
-  const ease = factor * factor * (3 - 2 * factor);
-  return { lift: ease * MAX_LIFT, ease };
+  if (variant === "top-left-to-bottom-right") {
+    const diag = Math.hypot(width, height);
+    const dx = width / diag;
+    const dy = height / diag;
+    const proj = cube.centerX * dx + cube.centerY * dy;
+    const startProj = -waveRadius;
+    const endProj = diag + waveRadius;
+    const waveProj = startProj + progress * (endProj - startProj);
+    return Math.abs(proj - waveProj);
+  }
+
+  if (variant === "circle-out") {
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const maxRadius = Math.hypot(centerX, centerY) + waveRadius;
+    const currentRadius = progress * maxRadius;
+    const cubeRadius = Math.hypot(cube.centerX - centerX, cube.centerY - centerY);
+    return Math.abs(cubeRadius - currentRadius);
+  }
+
+  if (variant === "circle-in") {
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const maxRadius = Math.hypot(centerX, centerY) + waveRadius;
+    const currentRadius = (1 - progress) * maxRadius;
+    const cubeRadius = Math.hypot(cube.centerX - centerX, cube.centerY - centerY);
+    return Math.abs(cubeRadius - currentRadius);
+  }
+
+  return Infinity;
 }
 
 export function LowPolyBackground({ spotX, spotY, active }: Props) {
@@ -129,18 +188,27 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const waveRadius = RIPPLE_RADIUS * 1.25;
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 6000; // Slowed down to 6s per sweep for a relaxed feel
+    const sweepDuration = 6000; // 6s per sweep
+
+    let lastCycle = -1;
+    const variantRef = { current: VARIANTS[0] };
 
     const tick = (time: number) => {
       if (!startTime) startTime = time;
       const elapsed = time - startTime;
+      const currentCycle = Math.floor(elapsed / sweepDuration);
       const progress = (elapsed % sweepDuration) / sweepDuration;
 
       const wrap = wrapRef.current;
       const width = wrap ? wrap.clientWidth : window.innerWidth;
-      const startX = -waveRadius;
-      const endX = width + waveRadius;
-      const waveX = startX + progress * (endX - startX);
+      const height = wrap ? wrap.clientHeight : window.innerHeight;
+
+      // Select a new variant when a cycle completes
+      if (currentCycle !== lastCycle) {
+        lastCycle = currentCycle;
+        const choices = VARIANTS.filter((v) => v !== variantRef.current);
+        variantRef.current = choices[Math.floor(Math.random() * choices.length)];
+      }
 
       // Access latest hover inputs from refs
       const isHoverActive = activeRef.current;
@@ -149,10 +217,18 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
 
       for (const cube of cubes) {
         const hoverEffect = isHoverActive ? getEffectForPoint(cube, hX, hY, RIPPLE_RADIUS) : { lift: 0, ease: 0 };
-        const waveEffect = getEffectForWave(cube, waveX, waveRadius);
+        const dist = getWaveDistance(cube, variantRef.current, progress, width, height, waveRadius);
 
-        const lift = Math.max(hoverEffect.lift, waveEffect.lift);
-        const ease = Math.max(hoverEffect.ease, waveEffect.ease);
+        let waveLift = 0;
+        let waveEase = 0;
+        if (dist < waveRadius) {
+          const factor = 1 - dist / waveRadius;
+          waveEase = factor * factor * (3 - 2 * factor);
+          waveLift = waveEase * MAX_LIFT;
+        }
+
+        const lift = Math.max(hoverEffect.lift, waveLift);
+        const ease = Math.max(hoverEffect.ease, waveEase);
 
         if (lift <= 0) {
           resetCube(cube.element);
