@@ -99,7 +99,7 @@ export function ProjectsSection() {
                   <div className="mt-4 overflow-hidden rounded-lg border border-line aspect-video bg-black">
                     <iframe
                       className="w-full h-full"
-                      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                      src="https://www.youtube.com/embed/Wjs4PNejlw4"
                       title="JoelEditz Video"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -143,7 +143,7 @@ export function ProjectsSection() {
                   <div className="mt-4 overflow-hidden rounded-lg border border-line aspect-video bg-black">
                     <iframe
                       className="w-full h-full"
-                      src="https://www.youtube.com/embed/s_NttXCpJDc"
+                      src="https://www.youtube.com/embed/A2-6tZnyXjM"
                       title="Build2Learn Video"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
