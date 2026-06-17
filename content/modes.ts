@@ -57,7 +57,7 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
     tabLabel: "content creator",
     tagline: "Stories, visuals, and experiences that connect.",
     intro:
-      "I craft engaging content and creative digital experiences — from eLearning worlds to media-focused web projects.",
+      "I craft engaging media, edit video content, and build digital learning experiences. I run @officialJoelEditz for funny meme edits and @Build2Learn for educational edits, merging technical topics with visual storytelling.",
     character: {
       image: "/characters/content-creator.svg",
       alt: "Content creator character with camera and editing tools",
@@ -70,11 +70,12 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
       backgroundUiverse: "slippery-bird-76",
     },
     highlights: [
-      "AIducator — immersive 3D learning",
-      "Visual storytelling & UI polish",
-      "WordPress · creative web projects",
+      "@officialJoelEditz — funny meme edits",
+      "@Build2Learn — educational tech edits",
+      "Ticket Portal — event ticketing platform",
+      "Sheet Ninja — GitLab sync platform",
     ],
-    featuredProjectIds: ["aiducator", "wordpress-movies"],
+    featuredProjectIds: ["joel-editz", "build-to-learn", "ticket-portal", "sheet-ninja"],
   },
 };
 

@@ -11,6 +11,12 @@ import {
   TestTube2,
   Wind,
   Zap,
+  Database,
+  Terminal,
+  Cloud,
+  Activity,
+  Cpu,
+  Monitor,
   type LucideIcon,
 } from "lucide-react";
 import { STACK_CATEGORIES } from "@/content/showcase-stack";
@@ -43,13 +49,19 @@ function iconForStackItem(name: string): LucideIcon {
   const key = name.toLowerCase();
   if (key.includes("next")) return Layers;
   if (key.includes("react")) return Atom;
-  if (key.includes("typescript")) return Code2;
+  if (key.includes("typescript") || key.includes("javascript")) return Code2;
   if (key.includes("tailwind")) return Wind;
   if (key.includes("docker") || key.includes("kubernetes")) return Boxes;
-  if (key.includes("gitlab") || key.includes("linux")) return Shield;
-  if (key.includes("gsap") || key.includes("framer") || key.includes("lenis")) return Zap;
+  if (key.includes("gitlab") || key.includes("actions") || key.includes("git")) return Shield;
+  if (key.includes("gsap") || key.includes("framer") || key.includes("lenis") || key.includes("roughjs")) return Zap;
   if (key.includes("vitest")) return TestTube2;
   if (key.includes("vercel") || key.includes("cursor")) return Globe;
+  if (key.includes("postgres") || key.includes("mysql") || key.includes("mongo") || key.includes("prisma") || key.includes("database")) return Database;
+  if (key.includes("python") || key.includes("bash") || key.includes("shell") || key.includes("terminal")) return Terminal;
+  if (key.includes("aws") || key.includes("ec2") || key.includes("cloud")) return Cloud;
+  if (key.includes("sentry") || key.includes("grafana") || key.includes("monitor")) return Activity;
+  if (key.includes("wordpress") || key.includes("php")) return Monitor;
+  if (key.includes("node") || key.includes("fastapi") || key.includes("express") || key.includes("jax-rs") || key.includes("ansible") || key.includes("apache") || key.includes("java")) return Cpu;
   return Code2;
 }
 

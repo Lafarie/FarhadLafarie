@@ -33,34 +33,70 @@ export function ProjectsSection() {
           </h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((project) => (
-              <li key={project.id} className="low-poly-card p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <h4 className="font-semibold text-ink">{project.title}</h4>
-                  <span className="shrink-0 text-xs text-ink-faint">{project.status}</span>
+              <li key={project.id} className="low-poly-card p-4 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-start justify-between gap-2">
+                    <h4 className="font-semibold text-ink flex items-center gap-1.5">
+                      {project.id === "joel-editz" || project.id === "build-to-learn" ? (
+                        <svg className="text-rose-600 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.516 3.5 12 3.5 12 3.5s-7.516 0-9.388.555a3.003 3.003 0 0 0-2.11 2.108C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.108c1.872.555 9.388.555 9.388.555s7.516 0 9.388-.555a3.003 3.003 0 0 0 2.11-2.108C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                      ) : null}
+                      {project.title}
+                    </h4>
+                    <span className="shrink-0 text-xs text-ink-faint">{project.status}</span>
+                  </div>
+                  <p className="mt-2 text-sm text-ink-dim">
+                    {project.description}
+                  </p>
+
+                  {/* YouTube Embeds */}
+                  {project.id === "joel-editz" && (
+                    <div className="mt-3 overflow-hidden rounded-lg border border-line aspect-video bg-black">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="JoelEditz Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  )}
+                  {project.id === "build-to-learn" && (
+                    <div className="mt-3 overflow-hidden rounded-lg border border-line aspect-video bg-black">
+                      <iframe
+                        className="w-full h-full"
+                        src="https://www.youtube.com/embed/s_NttXCpJDc"
+                        title="Build2Learn Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  )}
                 </div>
-                <p className="mt-2 line-clamp-3 text-sm text-ink-dim">
-                  {project.description}
-                </p>
-                <div className="mt-3 flex flex-wrap gap-1">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-line px-2 py-0.5 text-[10px] text-ink-faint"
+
+                <div>
+                  <div className="mt-4 flex flex-wrap gap-1">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-line px-2 py-0.5 text-[10px] text-ink-faint"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  {project.link ? (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex items-center gap-1 text-sm text-grape hover:text-saffron"
                     >
-                      {t}
-                    </span>
-                  ))}
+                      View Channel <ExternalLink size={12} />
+                    </a>
+                  ) : null}
                 </div>
-                {project.link ? (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1 text-sm text-grape hover:text-saffron"
-                  >
-                    View <ExternalLink size={12} />
-                  </a>
-                ) : null}
               </li>
             ))}
           </ul>
