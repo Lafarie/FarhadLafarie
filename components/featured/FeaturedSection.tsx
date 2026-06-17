@@ -2,7 +2,6 @@
 
 import type { CSSProperties } from "react";
 import { useCallback, useRef, useState } from "react";
-import { SITE } from "@/content/site";
 import { useMode } from "@/context/ModeContext";
 import { LowPolyBackground } from "@/components/background/LowPolyBackground";
 import { ModePersonImage } from "./ModePersonImage";
@@ -47,11 +46,6 @@ export function FeaturedSection() {
       <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
 
       <div className="section-reveal relative isolate z-20 flex w-full max-w-5xl flex-col items-center gap-6">
-
-        {/* Mode eyebrow label */}
-        <p className="text-sm font-black uppercase tracking-[0.35em] text-red-600">
-          {SITE.hero.modeEyebrow}
-        </p>
 
         {/* Mode Tabs */}
         <ModeTabs />
