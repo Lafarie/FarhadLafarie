@@ -17,7 +17,13 @@ type Props = { spotX: number; spotY: number; active: boolean };
 
 type CubeSlot = { id: string; x: number; y: number; zIndex: number };
 
-type CubeCache = { element: HTMLElement; centerX: number; centerY: number };
+type CubeCache = {
+  element: HTMLElement;
+  centerX: number;
+  centerY: number;
+  isReset?: boolean;
+  lastLift?: number;
+};
 
 type WaveVariant =
   | "left-to-right"
@@ -55,16 +61,29 @@ function buildCubeGrid(width: number, height: number): CubeSlot[] {
   return slots;
 }
 
+// Fast distance utility using direct sqrt instead of Math.hypot
+function fastHypot(dx: number, dy: number): number {
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
 function resetCube(el: HTMLElement) {
   el.style.transform = "";
   el.style.filter = "";
   el.style.removeProperty("--sheen-offset");
 }
 
+function cleanCubes(cubes: CubeCache[]) {
+  cubes.forEach((c) => {
+    resetCube(c.element);
+    c.isReset = true;
+    c.lastLift = 0;
+  });
+}
+
 function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number) {
   const dx = x - cube.centerX;
   const dy = y - cube.centerY;
-  const dist = Math.hypot(dx, dy);
+  const dist = fastHypot(dx, dy);
 
   if (dist >= radius) return { lift: 0, ease: 0 };
 
@@ -73,58 +92,26 @@ function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number
   return { lift: ease * MAX_LIFT, ease };
 }
 
-function getWaveDistance(
+// Optimized wave distance calculation using precomputed frame variables
+function getFastWaveDistance(
   cube: CubeCache,
   variant: WaveVariant,
-  progress: number,
-  width: number,
-  height: number,
-  waveRadius: number
+  waveParam: number,
+  diagDx: number,
+  diagDy: number,
+  screenCenterX: number,
+  screenCenterY: number
 ): number {
-  if (variant === "left-to-right") {
-    const startX = -waveRadius;
-    const endX = width + waveRadius;
-    const waveX = startX + progress * (endX - startX);
-    return Math.abs(cube.centerX - waveX);
+  if (variant === "left-to-right" || variant === "right-to-left") {
+    return Math.abs(cube.centerX - waveParam);
   }
-
-  if (variant === "right-to-left") {
-    const startX = width + waveRadius;
-    const endX = -waveRadius;
-    const waveX = startX + progress * (endX - startX);
-    return Math.abs(cube.centerX - waveX);
-  }
-
   if (variant === "top-left-to-bottom-right") {
-    const diag = Math.hypot(width, height);
-    const dx = width / diag;
-    const dy = height / diag;
-    const proj = cube.centerX * dx + cube.centerY * dy;
-    const startProj = -waveRadius;
-    const endProj = diag + waveRadius;
-    const waveProj = startProj + progress * (endProj - startProj);
-    return Math.abs(proj - waveProj);
+    const proj = cube.centerX * diagDx + cube.centerY * diagDy;
+    return Math.abs(proj - waveParam);
   }
-
-  if (variant === "circle-out") {
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const maxRadius = Math.hypot(centerX, centerY) + waveRadius;
-    const currentRadius = progress * maxRadius;
-    const cubeRadius = Math.hypot(cube.centerX - centerX, cube.centerY - centerY);
-    return Math.abs(cubeRadius - currentRadius);
-  }
-
-  if (variant === "circle-in") {
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const maxRadius = Math.hypot(centerX, centerY) + waveRadius;
-    const currentRadius = (1 - progress) * maxRadius;
-    const cubeRadius = Math.hypot(cube.centerX - centerX, cube.centerY - centerY);
-    return Math.abs(cubeRadius - currentRadius);
-  }
-
-  return Infinity;
+  // circle-out and circle-in
+  const cubeRadius = fastHypot(cube.centerX - screenCenterX, cube.centerY - screenCenterY);
+  return Math.abs(cubeRadius - waveParam);
 }
 
 export function LowPolyBackground({ spotX, spotY, active }: Props) {
@@ -174,6 +161,8 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         element: el,
         centerX: left + halfW,
         centerY: top + halfH,
+        isReset: true,
+        lastLift: 0,
       };
     });
   }, [slots]);
@@ -188,7 +177,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const waveRadius = RIPPLE_RADIUS * 1.25;
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 8000; // Slowed down to 8s per sweep
+    const sweepDuration = 8000; // Slower, relaxed 8s sweep
 
     let lastCycle = -1;
     const variantRef = { current: VARIANTS[0] };
@@ -202,6 +191,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
       const wrap = wrapRef.current;
       const width = wrap ? wrap.clientWidth : window.innerWidth;
       const height = wrap ? wrap.clientHeight : window.innerHeight;
+      const variant = variantRef.current;
 
       // Select a new variant when a cycle completes
       if (currentCycle !== lastCycle) {
@@ -210,22 +200,59 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         variantRef.current = choices[Math.floor(Math.random() * choices.length)];
       }
 
+      // Precompute animation parameters once per frame instead of inside loop
+      const p1 = progress;
+      const p2 = (progress - 0.25 + 1.0) % 1.0;
+
+      let waveParam1 = 0;
+      let waveParam2 = 0;
+      let diagDx = 0;
+      let diagDy = 0;
+      let screenCenterX = 0;
+      let screenCenterY = 0;
+
+      if (variant === "left-to-right") {
+        const startX = -waveRadius;
+        const endX = width + waveRadius;
+        waveParam1 = startX + p1 * (endX - startX);
+        waveParam2 = startX + p2 * (endX - startX);
+      } else if (variant === "right-to-left") {
+        const startX = width + waveRadius;
+        const endX = -waveRadius;
+        waveParam1 = startX + p1 * (endX - startX);
+        waveParam2 = startX + p2 * (endX - startX);
+      } else if (variant === "top-left-to-bottom-right") {
+        const diag = fastHypot(width, height);
+        diagDx = width / diag;
+        diagDy = height / diag;
+        const startProj = -waveRadius;
+        const endProj = diag + waveRadius;
+        waveParam1 = startProj + p1 * (endProj - startProj);
+        waveParam2 = startProj + p2 * (endProj - startProj);
+      } else if (variant === "circle-out" || variant === "circle-in") {
+        screenCenterX = width / 2;
+        screenCenterY = height / 2;
+        const maxCircleRadius = fastHypot(screenCenterX, screenCenterY) + waveRadius;
+        if (variant === "circle-out") {
+          waveParam1 = p1 * maxCircleRadius;
+          waveParam2 = p2 * maxCircleRadius;
+        } else {
+          waveParam1 = (1.0 - p1) * maxCircleRadius;
+          waveParam2 = (1.0 - p2) * maxCircleRadius;
+        }
+      }
+
       // Access latest hover inputs from refs
       const isHoverActive = activeRef.current;
       const hX = spotXRef.current;
       const hY = spotYRef.current;
 
-      // Calculate progress of trailing wave (2-second delay = 0.25 offset in an 8-second cycle)
-      const p1 = progress;
-      const p2 = (progress - 0.25 + 1.0) % 1.0;
-
       for (const cube of cubes) {
         const hoverEffect = isHoverActive ? getEffectForPoint(cube, hX, hY, RIPPLE_RADIUS) : { lift: 0, ease: 0 };
         
-        // Calculate distance for the leading wave
-        const dist1 = getWaveDistance(cube, variantRef.current, p1, width, height, waveRadius);
-        // Calculate distance for the trailing wave (2 seconds later)
-        const dist2 = getWaveDistance(cube, variantRef.current, p2, width, height, waveRadius);
+        // Optimized distance calculations
+        const dist1 = getFastWaveDistance(cube, variant, waveParam1, diagDx, diagDy, screenCenterX, screenCenterY);
+        const dist2 = getFastWaveDistance(cube, variant, waveParam2, diagDx, diagDy, screenCenterX, screenCenterY);
 
         let waveLift1 = 0;
         let waveEase1 = 0;
@@ -250,11 +277,20 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         const ease = Math.max(hoverEffect.ease, waveEase);
 
         if (lift <= 0) {
-          resetCube(cube.element);
+          if (!cube.isReset) {
+            resetCube(cube.element);
+            cube.isReset = true;
+            cube.lastLift = 0;
+          }
         } else {
-          cube.element.style.transform = `translateY(-${lift}px) translateZ(0)`;
-          cube.element.style.filter = `brightness(${1 + ease * 0.3})`;
-          cube.element.style.setProperty("--sheen-offset", `${ease * 200 - 100}%`);
+          // DOM write throttling: only apply if state transitioned or lift value shifted noticeably
+          if (cube.isReset || Math.abs((cube.lastLift ?? 0) - lift) > 0.05) {
+            cube.element.style.transform = `translateY(-${lift}px) translateZ(0)`;
+            cube.element.style.filter = `brightness(${1 + ease * 0.3})`;
+            cube.element.style.setProperty("--sheen-offset", `${ease * 200 - 100}%`);
+            cube.isReset = false;
+            cube.lastLift = lift;
+          }
         }
       }
 
@@ -264,11 +300,11 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     animationFrameId = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(animationFrameId);
-      cubes.forEach((c) => resetCube(c.element));
+      cleanCubes(cubes);
     };
   }, [isPlaying, slots]);
 
-  // Hook 2: Standard hover-only path (when vibe is paused)
+  // Hook 2: Optimized standard hover-only path (when vibe is paused)
   useEffect(() => {
     if (isPlaying) return;
 
@@ -276,18 +312,26 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     if (cubes.length === 0) return;
 
     if (!active) {
-      cubes.forEach((c) => resetCube(c.element));
+      cleanCubes(cubes);
       return;
     }
 
     for (const cube of cubes) {
       const hoverEffect = getEffectForPoint(cube, spotX, spotY, RIPPLE_RADIUS);
       if (hoverEffect.lift <= 0) {
-        resetCube(cube.element);
+        if (!cube.isReset) {
+          resetCube(cube.element);
+          cube.isReset = true;
+          cube.lastLift = 0;
+        }
       } else {
-        cube.element.style.transform = `translateY(-${hoverEffect.lift}px) translateZ(0)`;
-        cube.element.style.filter = `brightness(${1 + hoverEffect.ease * 0.3})`;
-        cube.element.style.setProperty("--sheen-offset", `${hoverEffect.ease * 200 - 100}%`);
+        if (cube.isReset || Math.abs((cube.lastLift ?? 0) - hoverEffect.lift) > 0.05) {
+          cube.element.style.transform = `translateY(-${hoverEffect.lift}px) translateZ(0)`;
+          cube.element.style.filter = `brightness(${1 + hoverEffect.ease * 0.3})`;
+          cube.element.style.setProperty("--sheen-offset", `${hoverEffect.ease * 200 - 100}%`);
+          cube.isReset = false;
+          cube.lastLift = hoverEffect.lift;
+        }
       }
     }
   }, [isPlaying, active, spotX, spotY, slots]);
