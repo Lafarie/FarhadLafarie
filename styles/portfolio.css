@@ -277,7 +277,7 @@
 @property --c2 { syntax: "<color>"; inherits: true; initial-value: #1a1a1a; }
 @property --c3 { syntax: "<color>"; inherits: true; initial-value: #3a3a3a; }
 
-[data-mode="developer"]       .mode-cube-pattern { --c1: #ededee; --c2: #1a1a1a; --c3: #3a3a3a; }
+[data-mode="developer"]       .mode-cube-pattern { --c1: #f3b5b5; --c2: #3d0a0a; --c3: #751a1a; }
 [data-mode="devops"]          .mode-cube-pattern { --c1: #b8dcc8; --c2: #0d3320; --c3: #1c5535; }
 [data-mode="content-creator"] .mode-cube-pattern { --c1: #f0d4b0; --c2: #3d1f08; --c3: #6b3a18; }
 
