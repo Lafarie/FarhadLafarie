@@ -260,6 +260,131 @@
 
 .mode-bg { background-color: var(--mode-base, var(--color-base)); }
 
+/* ── 3D isometric cube kinetic ripple (mobinkakei / loud-parrot-63 geometry) ── */
+@property --c1 { syntax: "<color>"; inherits: true; initial-value: #ededee; }
+@property --c2 { syntax: "<color>"; inherits: true; initial-value: #1a1a1a; }
+@property --c3 { syntax: "<color>"; inherits: true; initial-value: #3a3a3a; }
+
+[data-mode="developer"]       .mode-cube-pattern { --c1: #ededee; --c2: #1a1a1a; --c3: #3a3a3a; }
+[data-mode="devops"]          .mode-cube-pattern { --c1: #b8dcc8; --c2: #0d3320; --c3: #1c5535; }
+[data-mode="content-creator"] .mode-cube-pattern { --c1: #f0d4b0; --c2: #3d1f08; --c3: #6b3a18; }
+
+.mode-cube-pattern {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --cube-w: calc(var(--u) * 20);
+  --cube-h: calc(var(--u) * 22);
+  transition: --c1 0.6s ease, --c2 0.6s ease, --c3 0.6s ease;
+}
+
+.mode-cube {
+  position: absolute;
+  width: var(--cube-w);
+  height: var(--cube-h);
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.25s ease;
+  will-change: transform;
+}
+
+.mode-cube > div {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Top face — highlight ring */
+.mode-cube-face-top {
+  background: var(--c1);
+  clip-path: polygon(
+    evenodd,
+    calc(var(--u) * 10) 0px,
+    calc(var(--u) * 20) calc(var(--u) * 5),
+    calc(var(--u) * 10) calc(var(--u) * 10),
+    0px calc(var(--u) * 5),
+    calc(var(--u) * 10) 0px,
+    calc(var(--u) * 10) calc(var(--u) * 2.4),
+    calc(var(--u) * 5) calc(var(--u) * 5),
+    calc(var(--u) * 10) calc(var(--u) * 7.6),
+    calc(var(--u) * 15) calc(var(--u) * 5),
+    calc(var(--u) * 10) calc(var(--u) * 2.4)
+  );
+  z-index: 5;
+  overflow: hidden;
+}
+
+.mode-cube-face-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: translateX(var(--sheen-offset, -100%));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.mode-cube-face-left {
+  background: var(--c2);
+  clip-path: polygon(
+    0px calc(var(--u) * 5),
+    calc(var(--u) * 10) calc(var(--u) * 10),
+    calc(var(--u) * 10) calc(var(--u) * 22),
+    0px calc(var(--u) * 17)
+  );
+  z-index: 4;
+}
+
+.mode-cube-face-right {
+  background: var(--c3);
+  clip-path: polygon(
+    calc(var(--u) * 10) calc(var(--u) * 10),
+    calc(var(--u) * 20) calc(var(--u) * 5),
+    calc(var(--u) * 20) calc(var(--u) * 17),
+    calc(var(--u) * 10) calc(var(--u) * 22)
+  );
+  z-index: 4;
+}
+
+.mode-cube-inside-left {
+  background: var(--c2);
+  filter: brightness(0.7);
+  clip-path: polygon(
+    calc(var(--u) * 5) calc(var(--u) * 5),
+    calc(var(--u) * 10) calc(var(--u) * 7.6),
+    calc(var(--u) * 10) calc(var(--u) * 16),
+    calc(var(--u) * 5) calc(var(--u) * 13.4)
+  );
+  z-index: 2;
+}
+
+.mode-cube-inside-right {
+  background: var(--c3);
+  filter: brightness(0.8);
+  clip-path: polygon(
+    calc(var(--u) * 10) calc(var(--u) * 7.6),
+    calc(var(--u) * 15) calc(var(--u) * 5),
+    calc(var(--u) * 15) calc(var(--u) * 13.4),
+    calc(var(--u) * 10) calc(var(--u) * 16)
+  );
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-cube {
+    transition: none !important;
+  }
+}
+
 [data-mode="developer"] { --mode-base: #f7f7f2; --mode-accent: #3f3f3f; --mode-surface: #fdfdf8; }
 [data-mode="content-creator"] { --mode-base: #f9f6ef; --mode-accent: #474747; --mode-surface: #fffdf8; }
 [data-mode="devops"] { --mode-base: #f4f6f0; --mode-accent: #3a3a3a; --mode-surface: #fbfdf8; }

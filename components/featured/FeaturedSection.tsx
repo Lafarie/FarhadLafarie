@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import { useCallback, useRef, useState } from "react";
 import { SITE } from "@/content/site";
 import { useMode } from "@/context/ModeContext";
 import { LowPolyBackground } from "@/components/background/LowPolyBackground";
@@ -10,9 +11,26 @@ import { cn } from "@/lib/utils";
 
 export function FeaturedSection() {
   const { modeConfig } = useMode();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [spot, setSpot] = useState({ x: 0, y: 0, active: false });
+
+  const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setSpot({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      active: true,
+    });
+  }, []);
+
+  const onPointerLeave = useCallback(() => {
+    setSpot((prev) => ({ ...prev, active: false }));
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="featured"
       className={cn(
         "snap-section relative flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-12 pt-24",
@@ -25,8 +43,10 @@ export function FeaturedSection() {
           "--mode-surface": modeConfig.theme.surface,
         } as CSSProperties
       }
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
     >
-      <LowPolyBackground />
+      <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
 
       <div className="section-reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-8">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-ink-faint">
