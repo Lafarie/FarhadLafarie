@@ -188,7 +188,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const waveRadius = RIPPLE_RADIUS * 1.25;
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 6000; // 6s per sweep
+    const sweepDuration = 8000; // Slowed down to 8s per sweep
 
     let lastCycle = -1;
     const variantRef = { current: VARIANTS[0] };
@@ -215,17 +215,36 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
       const hX = spotXRef.current;
       const hY = spotYRef.current;
 
+      // Calculate progress of trailing wave (2-second delay = 0.25 offset in an 8-second cycle)
+      const p1 = progress;
+      const p2 = (progress - 0.25 + 1.0) % 1.0;
+
       for (const cube of cubes) {
         const hoverEffect = isHoverActive ? getEffectForPoint(cube, hX, hY, RIPPLE_RADIUS) : { lift: 0, ease: 0 };
-        const dist = getWaveDistance(cube, variantRef.current, progress, width, height, waveRadius);
+        
+        // Calculate distance for the leading wave
+        const dist1 = getWaveDistance(cube, variantRef.current, p1, width, height, waveRadius);
+        // Calculate distance for the trailing wave (2 seconds later)
+        const dist2 = getWaveDistance(cube, variantRef.current, p2, width, height, waveRadius);
 
-        let waveLift = 0;
-        let waveEase = 0;
-        if (dist < waveRadius) {
-          const factor = 1 - dist / waveRadius;
-          waveEase = factor * factor * (3 - 2 * factor);
-          waveLift = waveEase * MAX_LIFT;
+        let waveLift1 = 0;
+        let waveEase1 = 0;
+        if (dist1 < waveRadius) {
+          const factor = 1 - dist1 / waveRadius;
+          waveEase1 = factor * factor * (3 - 2 * factor);
+          waveLift1 = waveEase1 * MAX_LIFT;
         }
+
+        let waveLift2 = 0;
+        let waveEase2 = 0;
+        if (dist2 < waveRadius) {
+          const factor = 1 - dist2 / waveRadius;
+          waveEase2 = factor * factor * (3 - 2 * factor);
+          waveLift2 = waveEase2 * MAX_LIFT;
+        }
+
+        const waveLift = Math.max(waveLift1, waveLift2);
+        const waveEase = Math.max(waveEase1, waveEase2);
 
         const lift = Math.max(hoverEffect.lift, waveLift);
         const ease = Math.max(hoverEffect.ease, waveEase);
