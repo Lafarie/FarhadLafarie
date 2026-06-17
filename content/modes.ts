@@ -14,9 +14,9 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
       props: ["helmet", "pipeline"],
     },
     theme: {
-      base: "#0b1214",
-      accent: "#2fd6a6",
-      surface: "#12201e",
+      base: "#f4f6f0",
+      accent: "#3a3a3a",
+      surface: "#fbfdf8",
       backgroundUiverse: "dry-rabbit-69",
     },
     highlights: [
@@ -39,9 +39,9 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
       props: ["laptop"],
     },
     theme: {
-      base: "#0f0b14",
-      accent: "#8b4dc4",
-      surface: "#1a1326",
+      base: "#f7f7f2",
+      accent: "#3f3f3f",
+      surface: "#fdfdf8",
       backgroundUiverse: "loud-parrot-63",
     },
     highlights: [
@@ -64,9 +64,9 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
       props: ["camera", "editing-tool"],
     },
     theme: {
-      base: "#140f0b",
-      accent: "#ff6b9d",
-      surface: "#261a18",
+      base: "#f9f6ef",
+      accent: "#474747",
+      surface: "#fffdf8",
       backgroundUiverse: "slippery-bird-76",
     },
     highlights: [
