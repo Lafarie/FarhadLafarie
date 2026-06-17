@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" fill="none">
+  <rect width="320" height="400" rx="24" fill="#12201e"/>
+  <circle cx="160" cy="110" r="48" fill="#2fd6a6" opacity="0.25"/>
+  <path d="M120 95 Q160 55 200 95 L195 115 Q160 80 125 115 Z" fill="#2fd6a6" opacity="0.8"/>
+  <rect x="125" y="115" width="70" height="12" rx="4" fill="#1a8a6a"/>
+  <circle cx="160" cy="100" r="28" fill="#c4b8d4"/>
+  <rect x="108" y="148" width="104" height="110" rx="16" fill="#1a2e2a"/>
+  <rect x="60" y="220" width="200" height="8" rx="4" fill="#2fd6a6" opacity="0.6"/>
+  <rect x="80" y="240" width="160" height="8" rx="4" fill="#2fd6a6" opacity="0.4"/>
+  <rect x="100" y="260" width="120" height="8" rx="4" fill="#2fd6a6" opacity="0.3"/>
+  <text x="160" y="370" text-anchor="middle" fill="#958aa8" font-family="sans-serif" font-size="13">DevOps</text>
+</svg>

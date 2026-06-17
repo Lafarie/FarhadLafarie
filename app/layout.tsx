@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Footer from "@/app/components/footer";
 import Navbar from "@/app/components/navbar";
 import Script from "next/script";
 import "@/styles/globals.css";
+import "@/styles/portfolio.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://farhad-lafarie.vercel.app"),
@@ -92,10 +92,9 @@ export default function RootLayout({ children }: RootLayoutProps): ReactNode {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body className="overflow-hidden bg-base text-ink">
         <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

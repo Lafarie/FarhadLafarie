@@ -3,6 +3,8 @@ module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./content/**/*.{js,ts}",
+    "./context/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,6 +21,8 @@ module.exports = {
         magenta: "#9b59c6",
         rose: "#e84393",
         leaf: "#2fd6a6",
+        line: "rgba(139, 77, 196, 0.18)",
+        "line-strong": "rgba(255, 190, 11, 0.22)",
         ink: "#f5f0fa",
         "ink-dim": "#c4b8d4",
         "ink-faint": "#958aa8",

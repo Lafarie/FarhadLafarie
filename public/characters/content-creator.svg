@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" fill="none">
+  <rect width="320" height="400" rx="24" fill="#261a18"/>
+  <circle cx="160" cy="110" r="48" fill="#ff6b9d" opacity="0.25"/>
+  <circle cx="160" cy="100" r="36" fill="#c4b8d4"/>
+  <rect x="108" y="148" width="104" height="110" rx="16" fill="#3d2824"/>
+  <rect x="118" y="175" width="84" height="56" rx="8" fill="#0f0b14" stroke="#ff6b9d" stroke-width="3"/>
+  <circle cx="160" cy="203" r="18" fill="#ff6b9d" opacity="0.5"/>
+  <rect x="200" y="190" width="48" height="36" rx="6" fill="#0f0b14" stroke="#ffbe0b" stroke-width="2"/>
+  <line x1="208" y1="200" x2="240" y2="200" stroke="#ffbe0b" stroke-width="2"/>
+  <line x1="208" y1="210" x2="235" y2="210" stroke="#ffbe0b" stroke-width="2"/>
+  <text x="160" y="370" text-anchor="middle" fill="#958aa8" font-family="sans-serif" font-size="13">Content Creator</text>
+</svg>

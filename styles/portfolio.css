@@ -1,0 +1,136 @@
+/* Orbit social card */
+.showcase-orbit-planet {
+  will-change: transform;
+}
+
+.showcase-solar.is-paused .showcase-orbit-planet {
+  animation-play-state: paused !important;
+}
+
+@media (hover: hover) {
+  .showcase-solar:hover:not(.is-paused) .showcase-orbit-planet,
+  .showcase-solar:focus-within:not(.is-paused) .showcase-orbit-planet {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes showcase-sun-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+@keyframes showcase-sun-core {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(255, 190, 11, 0.45),
+      0 0 48px rgba(139, 77, 196, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(255, 190, 11, 0.75),
+      0 0 64px rgba(139, 77, 196, 0.35);
+  }
+}
+
+.showcase-sun-corona {
+  animation: showcase-sun-pulse 5s ease-in-out infinite;
+}
+
+.showcase-sun-core {
+  animation: showcase-sun-core 3.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-orbit-planet,
+  .showcase-sun-corona,
+  .showcase-sun-core {
+    animation: none;
+  }
+}
+
+/* Mode theming */
+.mode-bg {
+  background-color: var(--mode-base, var(--color-base));
+}
+
+[data-mode="developer"] {
+  --color-base: #0f0b14;
+  --color-accent: #8b4dc4;
+  --color-surface: #1a1326;
+}
+
+[data-mode="content-creator"] {
+  --color-base: #140f0b;
+  --color-accent: #ff6b9d;
+  --color-surface: #261a18;
+}
+
+[data-mode="devops"] {
+  --color-base: #0b1214;
+  --color-accent: #2fd6a6;
+  --color-surface: #12201e;
+}
+
+/* Snap scroll */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Uiverse pattern — developer (loud-parrot-63) */
+[data-uiverse="loud-parrot-63"] .uiverse-bg {
+  --u: 4px;
+  --c1: rgba(139, 77, 196, 0.08);
+  --c2: rgba(15, 11, 20, 0.9);
+  --c3: rgba(107, 45, 145, 0.12);
+  background: conic-gradient(
+      from 122deg at 50% 85.15%,
+      var(--c2) 0 58deg,
+      var(--c3) 0 116deg,
+      #fff0 0 100%
+    )
+    50% / calc(var(--u) * 16.9) calc(var(--u) * 12.8),
+    conic-gradient(from 122deg at 50% 72.5%, var(--c1) 0 116deg, #fff0 0 100%) 50% /
+      calc(var(--u) * 16.9) calc(var(--u) * 12.8);
+}
+
+/* Uiverse — content creator (slippery-bird holographic hint) */
+[data-uiverse="slippery-bird-76"] .uiverse-bg {
+  background: linear-gradient(
+      to bottom,
+      rgba(254, 85, 136, 0.06),
+      transparent 40%
+    ),
+    conic-gradient(
+      at 60% 50%,
+      rgba(139, 77, 196, 0.1),
+      rgba(255, 107, 157, 0.15),
+      rgba(0, 249, 248, 0.08),
+      rgba(139, 77, 196, 0.1)
+    );
+  animation: holo-shift 6s ease-in-out infinite alternate;
+}
+
+@keyframes holo-shift {
+  to {
+    filter: hue-rotate(25deg);
+  }
+}
+
+/* Uiverse — devops industrial grid */
+[data-uiverse="dry-rabbit-69"] .uiverse-bg {
+  background-image: linear-gradient(rgba(47, 214, 166, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 214, 166, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
