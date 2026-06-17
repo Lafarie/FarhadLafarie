@@ -221,7 +221,7 @@ function AuthorSolarSystem({ links }: { links: ShowcaseAuthorLink[] }) {
             "pointer-events-none absolute inset-x-0 bottom-0 text-center text-[10px] font-medium uppercase tracking-[0.2em] text-ink-faint transition-opacity",
             paused ? "opacity-100" : "opacity-0 group-hover:opacity-100",
           )}>
-            {paused ? "orbits paused · pick a link" : "hover to pause"}
+            {paused ? "orbits paused · pick a link" : "click to pause"}
           </p>
         </div>
       </div>
