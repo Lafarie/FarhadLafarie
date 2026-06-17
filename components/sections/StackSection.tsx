@@ -57,7 +57,7 @@ function StackCategoryCard({ category }: { category: ShowcaseStackCategory }) {
   const styles = ACCENT[category.accent];
 
   return (
-    <article className="relative overflow-hidden rounded-2xl border border-line bg-surface/30 p-5">
+    <article className="low-poly-card relative overflow-hidden p-5">
       <div
         className={cn(
           "pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br opacity-60 blur-2xl",
@@ -139,7 +139,7 @@ export function StackSection() {
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-saffron">
           [ {SITE.stack.label} ]
         </p>
-        <h2 className="mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+        <h2 className="low-poly-heading mt-4 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {SITE.stack.title}
         </h2>
         <p className="mt-4 max-w-2xl text-ink-dim">{SITE.stack.intro}</p>

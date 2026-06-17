@@ -1,3 +1,201 @@
+/* ── Low-poly design system ── */
+
+.low-poly-nav {
+  border-bottom: 2px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-base) 88%, transparent);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 24px) 100%, 24px 100%, 0 calc(100% - 8px));
+  backdrop-filter: blur(12px);
+}
+
+.low-poly-panel {
+  position: relative;
+  background: color-mix(in srgb, var(--color-surface) 75%, transparent);
+  border: 2px solid var(--color-line);
+  clip-path: polygon(
+    12px 0,
+    100% 0,
+    100% calc(100% - 12px),
+    calc(100% - 12px) 100%,
+    0 100%,
+    0 12px
+  );
+  box-shadow:
+    4px 4px 0 color-mix(in srgb, var(--mode-accent, var(--color-grape)) 25%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 6%, transparent);
+}
+
+.low-poly-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--mode-accent, var(--color-grape)) 8%, transparent) 0%,
+    transparent 50%
+  );
+  pointer-events: none;
+}
+
+.low-poly-tab-bar {
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+  border: 2px solid var(--color-line);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+}
+
+.low-poly-tab {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-ink-faint);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.low-poly-tab:hover {
+  color: var(--color-ink-dim);
+}
+
+.low-poly-tab.is-active {
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--mode-accent, var(--color-grape)) 22%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mode-accent, var(--color-grape)) 40%, transparent);
+}
+
+.low-poly-card {
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  border: 2px solid var(--color-line);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.low-poly-card:hover {
+  border-color: color-mix(in srgb, var(--mode-accent, var(--color-grape)) 50%, transparent);
+  transform: translateY(-2px);
+}
+
+.low-poly-chip {
+  border: 1px solid var(--color-line);
+  background: color-mix(in srgb, var(--color-surface-2) 60%, transparent);
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-ink-dim);
+}
+
+.low-poly-heading {
+  position: relative;
+  display: inline-block;
+}
+
+.low-poly-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 48px;
+  height: 3px;
+  background: var(--mode-accent, var(--color-grape));
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 100%, 4px 100%);
+}
+
+.low-poly-character-frame {
+  position: relative;
+  clip-path: polygon(
+    0 8%,
+    8% 0,
+    92% 0,
+    100% 8%,
+    100% 92%,
+    92% 100%,
+    8% 100%,
+    0 92%
+  );
+  border: 3px solid color-mix(in srgb, var(--mode-accent, var(--color-grape)) 45%, transparent);
+  box-shadow:
+    0 0 40px color-mix(in srgb, var(--mode-accent, var(--color-grape)) 15%, transparent),
+    8px 8px 0 color-mix(in srgb, var(--mode-accent, var(--color-grape)) 20%, transparent);
+}
+
+.low-poly-character-frame::before,
+.low-poly-character-frame::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid color-mix(in srgb, var(--mode-accent, var(--color-grape)) 60%, transparent);
+  pointer-events: none;
+}
+
+.low-poly-character-frame::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.low-poly-character-frame::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+.low-poly-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: color-mix(in srgb, var(--mode-accent, var(--color-grape)) 30%, var(--color-surface));
+  border: 2px solid color-mix(in srgb, var(--mode-accent, var(--color-grape)) 50%, transparent);
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.low-poly-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--mode-accent, var(--color-grape)) 35%, transparent);
+}
+
+/* Mode theming */
+.mode-bg {
+  background-color: var(--mode-base, var(--color-base));
+}
+
+[data-mode="developer"] {
+  --color-base: #0f0b14;
+  --color-accent: #8b4dc4;
+  --color-surface: #1a1326;
+  --mode-accent: #8b4dc4;
+}
+
+[data-mode="content-creator"] {
+  --color-base: #140f0b;
+  --color-accent: #ff6b9d;
+  --color-surface: #261a18;
+  --mode-accent: #ff6b9d;
+}
+
+[data-mode="devops"] {
+  --color-base: #0b1214;
+  --color-accent: #2fd6a6;
+  --color-surface: #12201e;
+  --mode-accent: #2fd6a6;
+}
+
 /* Orbit social card */
 .showcase-orbit-planet {
   will-change: transform;
@@ -56,27 +254,32 @@
   }
 }
 
-/* Mode theming */
-.mode-bg {
-  background-color: var(--mode-base, var(--color-base));
+/* Subtle faceted backdrop on inner sections */
+.snap-section:not(#featured) {
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--color-surface) 40%, transparent) 0%,
+      var(--color-base) 45%,
+      color-mix(in srgb, var(--color-surface-2) 30%, transparent) 100%
+    );
+  background-size: 100% 100%;
 }
 
-[data-mode="developer"] {
-  --color-base: #0f0b14;
-  --color-accent: #8b4dc4;
-  --color-surface: #1a1326;
+.snap-section:not(#featured)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(30deg, transparent 48%, color-mix(in srgb, var(--color-grape) 12%, transparent) 49%, transparent 51%),
+    linear-gradient(150deg, transparent 48%, color-mix(in srgb, var(--color-grape) 8%, transparent) 49%, transparent 51%);
+  background-size: 80px 140px;
 }
 
-[data-mode="content-creator"] {
-  --color-base: #140f0b;
-  --color-accent: #ff6b9d;
-  --color-surface: #261a18;
-}
-
-[data-mode="devops"] {
-  --color-base: #0b1214;
-  --color-accent: #2fd6a6;
-  --color-surface: #12201e;
+.snap-section {
+  position: relative;
 }
 
 /* Snap scroll */
@@ -86,51 +289,4 @@
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-/* Uiverse pattern — developer (loud-parrot-63) */
-[data-uiverse="loud-parrot-63"] .uiverse-bg {
-  --u: 4px;
-  --c1: rgba(139, 77, 196, 0.08);
-  --c2: rgba(15, 11, 20, 0.9);
-  --c3: rgba(107, 45, 145, 0.12);
-  background: conic-gradient(
-      from 122deg at 50% 85.15%,
-      var(--c2) 0 58deg,
-      var(--c3) 0 116deg,
-      #fff0 0 100%
-    )
-    50% / calc(var(--u) * 16.9) calc(var(--u) * 12.8),
-    conic-gradient(from 122deg at 50% 72.5%, var(--c1) 0 116deg, #fff0 0 100%) 50% /
-      calc(var(--u) * 16.9) calc(var(--u) * 12.8);
-}
-
-/* Uiverse — content creator (slippery-bird holographic hint) */
-[data-uiverse="slippery-bird-76"] .uiverse-bg {
-  background: linear-gradient(
-      to bottom,
-      rgba(254, 85, 136, 0.06),
-      transparent 40%
-    ),
-    conic-gradient(
-      at 60% 50%,
-      rgba(139, 77, 196, 0.1),
-      rgba(255, 107, 157, 0.15),
-      rgba(0, 249, 248, 0.08),
-      rgba(139, 77, 196, 0.1)
-    );
-  animation: holo-shift 6s ease-in-out infinite alternate;
-}
-
-@keyframes holo-shift {
-  to {
-    filter: hue-rotate(25deg);
-  }
-}
-
-/* Uiverse — devops industrial grid */
-[data-uiverse="dry-rabbit-69"] .uiverse-bg {
-  background-image: linear-gradient(rgba(47, 214, 166, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(47, 214, 166, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
 }

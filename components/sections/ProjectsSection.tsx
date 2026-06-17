@@ -20,7 +20,7 @@ export function ProjectsSection() {
       className="snap-section flex min-h-[100dvh] flex-col justify-center px-6 py-24"
     >
       <div className="section-reveal mx-auto w-full max-w-6xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+        <h2 className="low-poly-heading text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           My Projects
         </h2>
         <p className="mt-3 max-w-2xl text-ink-dim">
@@ -33,10 +33,7 @@ export function ProjectsSection() {
           </h3>
           <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((project) => (
-              <li
-                key={project.id}
-                className="rounded-2xl border border-line bg-surface/30 p-4"
-              >
+              <li key={project.id} className="low-poly-card p-4">
                 <div className="flex items-start justify-between gap-2">
                   <h4 className="font-semibold text-ink">{project.title}</h4>
                   <span className="shrink-0 text-xs text-ink-faint">{project.status}</span>

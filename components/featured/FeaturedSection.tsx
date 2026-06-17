@@ -3,6 +3,7 @@
 import type { CSSProperties } from "react";
 import { SITE } from "@/content/site";
 import { useMode } from "@/context/ModeContext";
+import { LowPolyBackground } from "@/components/background/LowPolyBackground";
 import { ModePersonImage } from "./ModePersonImage";
 import { ModeTabs } from "./ModeTabs";
 import { cn } from "@/lib/utils";
@@ -24,9 +25,8 @@ export function FeaturedSection() {
           "--mode-surface": modeConfig.theme.surface,
         } as CSSProperties
       }
-      data-uiverse={modeConfig.theme.backgroundUiverse}
     >
-      <div className="uiverse-bg pointer-events-none absolute inset-0 opacity-30" aria-hidden />
+      <LowPolyBackground />
 
       <div className="section-reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-8">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-ink-faint">
@@ -37,17 +37,14 @@ export function FeaturedSection() {
 
         <ModePersonImage />
 
-        <div className="max-w-md text-center">
-          <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+        <div className="low-poly-panel max-w-md p-6 text-center">
+          <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
             {modeConfig.tagline}
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
+          <p className="mt-5 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
           <ul className="mt-4 flex flex-wrap justify-center gap-2">
             {modeConfig.highlights.map((line) => (
-              <li
-                key={line}
-                className="rounded-full border border-line bg-white/[0.03] px-3 py-1 text-xs text-ink-dim"
-              >
+              <li key={line} className="low-poly-chip">
                 {line}
               </li>
             ))}

@@ -29,7 +29,7 @@ export function SocialOrbitSection() {
           <p className="text-xs font-bold uppercase tracking-[0.24em] text-saffron">
             Connect
           </p>
-          <h2 className="mt-2 text-3xl font-semibold text-ink">{SITE.meta.name}</h2>
+          <h2 className="low-poly-heading mt-2 text-3xl font-semibold text-ink">{SITE.meta.name}</h2>
           <p className="mt-2 text-sm text-ink-dim">
             {SITE.meta.jobTitles.join(" · ")}
           </p>

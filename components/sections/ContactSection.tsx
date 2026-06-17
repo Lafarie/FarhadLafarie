@@ -21,13 +21,13 @@ export function ContactSection() {
       className="snap-section flex min-h-[100dvh] flex-col justify-center px-6 py-24"
     >
       <div className="section-reveal mx-auto w-full max-w-xl">
-        <h2 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+        <h2 className="low-poly-heading text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
           {SITE.contact.title}
         </h2>
         <p className="mt-3 text-ink-dim">{SITE.contact.subtitle}</p>
 
         <form
-          className="mt-8 space-y-4 rounded-2xl border border-line bg-surface/30 p-6"
+          className="low-poly-panel mt-8 space-y-4 p-6"
           onSubmit={(e) => e.preventDefault()}
         >
           <div>
@@ -68,11 +68,7 @@ export function ContactSection() {
               className="mt-1 w-full rounded-lg border border-line bg-base/50 px-3 py-2 text-ink outline-none focus:border-grape"
             />
           </div>
-          <button
-            type="button"
-            onClick={handleSend}
-            className="inline-flex items-center gap-2 rounded-full bg-grape px-5 py-2.5 text-sm font-semibold text-ink transition hover:bg-grape/80"
-          >
+          <button type="button" onClick={handleSend} className="low-poly-btn">
             <Mail size={16} />
             {SITE.contact.labels.submit}
           </button>

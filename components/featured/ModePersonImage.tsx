@@ -10,9 +10,8 @@ export function ModePersonImage() {
   return (
     <div
       className={cn(
-        "relative mx-auto w-[min(90vw,22rem)] overflow-hidden rounded-3xl border border-line",
-        "bg-surface/40 shadow-xl shadow-black/30 sm:w-[min(70vw,20rem)]",
-        "aspect-[4/5]",
+        "low-poly-character-frame relative mx-auto w-[min(90vw,22rem)] overflow-hidden",
+        "aspect-[4/5] sm:w-[min(70vw,20rem)]",
       )}
     >
       <Image
