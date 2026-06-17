@@ -2,28 +2,6 @@ import type { Project } from "./types";
 
 export const PROJECTS: Project[] = [
   {
-    id: "joel-editz",
-    title: "@officialJoelEditz",
-    description:
-      "My YouTube channel specializing in high-energy funny meme edits, technical humor, and motion graphics. Combined storytelling with fast-paced video edits to build an engaging channel layout.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=600&auto=format&fit=crop",
-    link: "https://www.youtube.com/@officialJoelEditz",
-    status: "Completed",
-    tech: ["Video Editing", "After Effects", "Premiere Pro", "Motion Graphics"],
-    tags: ["content"],
-  },
-  {
-    id: "build-to-learn",
-    title: "@Build2Learn",
-    description:
-      "My educational YouTube channel dedicated to clarifying complex technical concepts, programming languages, and networking infrastructure through clear, visually-rich video lessons.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600&auto=format&fit=crop",
-    link: "https://www.youtube.com/@Build2Learn",
-    status: "Completed",
-    tech: ["eLearning", "Motion Graphics", "Video Editing", "DevOps Education"],
-    tags: ["content"],
-  },
-  {
     id: "ticket-portal",
     title: "Ticket Portal 2025",
     description:

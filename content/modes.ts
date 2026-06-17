@@ -75,7 +75,7 @@ export const MODES: Record<ModeConfig["id"], ModeConfig> = {
       "eLearning & Technical Visual Design",
       "Video Editing & Digital Storytelling",
     ],
-    featuredProjectIds: ["joel-editz", "build-to-learn", "ticket-portal", "sheet-ninja"],
+    featuredProjectIds: ["ticket-portal", "sheet-ninja"],
   },
 };
 
