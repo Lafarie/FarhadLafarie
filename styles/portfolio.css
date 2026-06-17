@@ -173,6 +173,18 @@
   border-left-width: 1.2px;
 }
 
+[data-mode="devops"] .low-poly-tab.is-active {
+  background: #e2f0d9;
+}
+
+[data-mode="developer"] .low-poly-tab.is-active {
+  background: #e8d8f8;
+}
+
+[data-mode="content-creator"] .low-poly-tab.is-active {
+  background: #fce8cc;
+}
+
 .low-poly-chip {
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-top-width: 1.6px;
