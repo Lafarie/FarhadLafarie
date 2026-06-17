@@ -74,9 +74,8 @@ export function ProjectsSection() {
           </ul>
         </div>
 
-        {/* YouTube Channels & Video Highlights for Content Creator mode */}
-        {modeConfig.id === "content-creator" && (
-          <div className="mt-16 border-t border-line/30 pt-12">
+        {/* YouTube Channels & Video Highlights — always visible */}
+        <div className="mt-16 border-t border-line/30 pt-12">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-saffron">
               YouTube Channels &amp; Video Edits
             </h3>
@@ -170,7 +169,6 @@ export function ProjectsSection() {
               </div>
             </div>
           </div>
-        )}
 
         {/* All Remaining Projects (Archive) */}
         {rest.length > 0 ? (
