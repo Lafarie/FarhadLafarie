@@ -53,8 +53,7 @@ export function initSnapScroll(scroller: HTMLElement): () => void {
 
   if (prefersReducedMotion()) {
     scroller.classList.remove("overflow-hidden");
-    scroller.classList.add("overflow-y-auto", "snap-y", "snap-mandatory");
-    sections.forEach((section) => section.classList.add("snap-start"));
+    scroller.classList.add("overflow-y-auto");
     bindScrollerProxy(scroller);
     ScrollTrigger.refresh();
     return () => ScrollTrigger.scrollerProxy(scroller);
@@ -91,6 +90,8 @@ export function initSnapScroll(scroller: HTMLElement): () => void {
     pinType: "transform",
   });
 
+  // Commented out section snapping (auto-scroll) to allow natural scrolling on cards
+  /*
   sections.forEach((section) => {
     ScrollTrigger.create({
       trigger: section,
@@ -105,6 +106,7 @@ export function initSnapScroll(scroller: HTMLElement): () => void {
       },
     });
   });
+  */
 
   const onTick = (time: number) => {
     lenis?.raf(time * 1000);
