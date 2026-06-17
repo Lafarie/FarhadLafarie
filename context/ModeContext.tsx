@@ -29,16 +29,20 @@ export function ModeProvider({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const visibleRef = useRef(true); // tracks whether #featured section is in view
 
   const startAutoCycle = useCallback(() => {
     if (timerRef.current) clearInterval(timerRef.current);
-    
+
     timerRef.current = setInterval(() => {
+      // Only auto-switch when the hero/featured section is visible
+      if (!visibleRef.current) return;
+
       setModeState((prevMode) => {
         const nextIndex = (MODE_TAB_ORDER.indexOf(prevMode) + 1) % MODE_TAB_ORDER.length;
         return MODE_TAB_ORDER[nextIndex];
       });
-    }, 7000); // cycle every 7 seconds
+    }, 7000);
   }, []);
 
   useEffect(() => {
@@ -47,11 +51,20 @@ export function ModeProvider({ children }: { children: ReactNode }) {
       setModeState(stored);
     }
     setHydrated(true);
-
     startAutoCycle();
+
+    // Pause auto-cycle when user scrolls away from the featured section
+    const observer = new IntersectionObserver(
+      ([entry]) => { visibleRef.current = entry.isIntersecting; },
+      { threshold: 0.3 },
+    );
+
+    const section = document.getElementById("featured");
+    if (section) observer.observe(section);
 
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      observer.disconnect();
     };
   }, [startAutoCycle]);
 

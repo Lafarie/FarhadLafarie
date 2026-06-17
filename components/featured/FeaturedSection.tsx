@@ -49,44 +49,49 @@ export function FeaturedSection() {
     >
       <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
 
-      <div className="section-reveal relative isolate z-20 flex w-full max-w-lg flex-col items-center gap-8">
-        <p
-          className={cn(
-            "text-xs font-bold uppercase tracking-[0.28em] transition-colors duration-500",
-            modeConfig.id === "devops" && "text-[#148062]",
-            modeConfig.id === "developer" && "text-[#8b4dc4]",
-            modeConfig.id === "content-creator" && "text-[#ff6b9d]"
-          )}
-        >
+      <div className="section-reveal relative isolate z-20 flex w-full max-w-5xl flex-col items-center gap-6">
+
+        {/* Mode eyebrow label — black, bold, larger */}
+        <p className="text-sm font-black uppercase tracking-[0.35em] text-ink">
           {SITE.hero.modeEyebrow}
         </p>
 
+        {/* Mode Tabs */}
         <ModeTabs />
 
-        <ModePersonImage />
+        {/* Side-by-side: Image + Detail Card */}
+        <div className="flex w-full flex-col items-center gap-6 lg:flex-row lg:items-stretch lg:gap-8">
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={modeConfig.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
-            className="low-poly-panel max-w-md p-6 text-center w-full"
-          >
-            <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              {modeConfig.tagline}
-            </h1>
-            <p className="mt-5 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
-            <ul className="mt-4 flex flex-wrap justify-center gap-2">
-              {modeConfig.highlights.map((line) => (
-                <li key={line} className="low-poly-chip">
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </AnimatePresence>
+          {/* Character Image */}
+          <div className="w-full max-w-xs shrink-0 lg:w-64 xl:w-72">
+            <ModePersonImage />
+          </div>
+
+          {/* Detail Card — fade only, no y-shift to avoid scroll reflow */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={modeConfig.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="low-poly-panel flex-1 p-6 text-left"
+            >
+              <h1 className="low-poly-heading text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                {modeConfig.tagline}
+              </h1>
+              <p className="mt-4 text-sm leading-relaxed text-ink-dim">{modeConfig.intro}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {modeConfig.highlights.map((line) => (
+                  <li key={line} className="low-poly-chip">
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
       </div>
     </section>
   );
