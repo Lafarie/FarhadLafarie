@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import { useVibe } from "@/context/VibeContext";
 
 /** Scale unit — matches the kinetic-ripple demo */
-const U = 6;
+const U = 10;
 const X_STEP = U * 16.9;
 const Y_STEP = U * 6.4;
 const CUBE_W = U * 20;
