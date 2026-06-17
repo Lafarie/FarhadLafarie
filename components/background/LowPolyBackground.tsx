@@ -4,15 +4,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { useVibe } from "@/context/VibeContext";
 
-/** Scale unit — matches the kinetic-ripple demo */
-const U = 10;
-const X_STEP = U * 16.9;
-const Y_STEP = U * 6.4;
-const CUBE_W = U * 20;
-const CUBE_H = U * 22;
-const RIPPLE_RADIUS = 200;
-const MAX_LIFT = 10;
-
 type Props = { spotX: number; spotY: number; active: boolean };
 
 type CubeSlot = { id: string; x: number; y: number; zIndex: number };
@@ -40,19 +31,21 @@ const VARIANTS: WaveVariant[] = [
   "circle-in"
 ];
 
-function buildCubeGrid(width: number, height: number): CubeSlot[] {
-  const cols = Math.ceil(width / X_STEP) + 2;
-  const rows = Math.ceil(height / Y_STEP) + 3;
+function buildCubeGrid(width: number, height: number, scaleUnit: number): CubeSlot[] {
+  const xStep = scaleUnit * 16.9;
+  const yStep = scaleUnit * 6.4;
+  const cols = Math.ceil(width / xStep) + 2;
+  const rows = Math.ceil(height / yStep) + 3;
   const slots: CubeSlot[] = [];
 
   for (let r = -1; r < rows; r++) {
     for (let c = -1; c < cols; c++) {
-      let x = c * X_STEP;
-      if (r % 2 !== 0) x += X_STEP / 2;
+      let x = c * xStep;
+      if (r % 2 !== 0) x += xStep / 2;
       slots.push({
         id: `${r}-${c}`,
         x,
-        y: r * Y_STEP,
+        y: r * yStep,
         // depth among cubes only — capped so rows never beat page content
         zIndex: Math.min(r + 2, 8),
       });
@@ -80,7 +73,7 @@ function cleanCubes(cubes: CubeCache[]) {
   });
 }
 
-function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number) {
+function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number, maxLift: number) {
   const dx = x - cube.centerX;
   const dy = y - cube.centerY;
   const dist = fastHypot(dx, dy);
@@ -89,7 +82,7 @@ function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number
 
   const factor = 1 - dist / radius;
   const ease = factor * factor * (3 - 2 * factor);
-  return { lift: ease * MAX_LIFT, ease };
+  return { lift: ease * maxLift, ease };
 }
 
 // Optimized wave distance calculation using precomputed frame variables
@@ -115,7 +108,9 @@ function getFastWaveDistance(
 }
 
 export function LowPolyBackground({ spotX, spotY, active }: Props) {
-  const { isPlaying } = useVibe();
+  const { isPlaying, settings } = useVibe();
+  const { proximityEnabled, scaleUnit, rippleRadius, maxLift, overrideColors, c1, c2, c3 } = settings;
+
   const wrapRef = useRef<HTMLDivElement>(null);
   const cacheRef = useRef<CubeCache[]>([]);
   const [slots, setSlots] = useState<CubeSlot[]>([]);
@@ -131,28 +126,30 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     spotYRef.current = spotY;
   }, [active, spotX, spotY]);
 
-  // Build staggered isometric grid on resize
+  // Build staggered isometric grid on resize or scaleUnit changes
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
 
     const update = () => {
-      setSlots(buildCubeGrid(wrap.clientWidth, wrap.clientHeight));
+      setSlots(buildCubeGrid(wrap.clientWidth, wrap.clientHeight, scaleUnit));
     };
 
     update();
     const ro = new ResizeObserver(update);
     ro.observe(wrap);
     return () => ro.disconnect();
-  }, []);
+  }, [scaleUnit]);
 
-  // Cache cube centres for distance lookup
+  // Cache cube centres for distance lookup (re-triggered when grid rebuilds or scaleUnit shifts)
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
 
-    const halfW = CUBE_W / 2;
-    const halfH = CUBE_H / 2;
+    const cubeW = scaleUnit * 20;
+    const cubeH = scaleUnit * 22;
+    const halfW = cubeW / 2;
+    const halfH = cubeH / 2;
 
     cacheRef.current = Array.from(wrap.querySelectorAll<HTMLElement>("[data-cube]")).map((el) => {
       const left = parseFloat(el.style.left);
@@ -165,7 +162,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         lastLift: 0,
       };
     });
-  }, [slots]);
+  }, [slots, scaleUnit]);
 
   // Hook 1: Vibe play sweep loop (no hover dependency in array to prevent resets)
   useEffect(() => {
@@ -174,10 +171,10 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const cubes = cacheRef.current;
     if (cubes.length === 0) return;
 
-    const waveRadius = RIPPLE_RADIUS * 1.25;
+    const waveRadius = rippleRadius * 1.25;
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 16000; // Slowed down to 16s sweep
+    const sweepDuration = 16000; // Slowed 16s sweep
 
     let lastCycle = -1;
     const variantRef = { current: VARIANTS[0] };
@@ -248,7 +245,9 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
       const hY = spotYRef.current;
 
       for (const cube of cubes) {
-        const hoverEffect = isHoverActive ? getEffectForPoint(cube, hX, hY, RIPPLE_RADIUS) : { lift: 0, ease: 0 };
+        const hoverEffect = (isHoverActive && proximityEnabled)
+          ? getEffectForPoint(cube, hX, hY, rippleRadius, maxLift)
+          : { lift: 0, ease: 0 };
         
         // Optimized distance calculations
         const dist1 = getFastWaveDistance(cube, variant, waveParam1, diagDx, diagDy, screenCenterX, screenCenterY);
@@ -259,7 +258,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         if (dist1 < waveRadius) {
           const factor = 1 - dist1 / waveRadius;
           waveEase1 = factor * factor * (3 - 2 * factor);
-          waveLift1 = waveEase1 * MAX_LIFT;
+          waveLift1 = waveEase1 * maxLift;
         }
 
         let waveLift2 = 0;
@@ -267,7 +266,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         if (dist2 < waveRadius) {
           const factor = 1 - dist2 / waveRadius;
           waveEase2 = factor * factor * (3 - 2 * factor);
-          waveLift2 = waveEase2 * MAX_LIFT;
+          waveLift2 = waveEase2 * maxLift;
         }
 
         const waveLift = Math.max(waveLift1, waveLift2);
@@ -302,7 +301,7 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
       cancelAnimationFrame(animationFrameId);
       cleanCubes(cubes);
     };
-  }, [isPlaying, slots]);
+  }, [isPlaying, proximityEnabled, rippleRadius, maxLift, slots]);
 
   // Hook 2: Optimized standard hover-only path (when vibe is paused)
   useEffect(() => {
@@ -311,13 +310,13 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     const cubes = cacheRef.current;
     if (cubes.length === 0) return;
 
-    if (!active) {
+    if (!active || !proximityEnabled) {
       cleanCubes(cubes);
       return;
     }
 
     for (const cube of cubes) {
-      const hoverEffect = getEffectForPoint(cube, spotX, spotY, RIPPLE_RADIUS);
+      const hoverEffect = getEffectForPoint(cube, spotX, spotY, rippleRadius, maxLift);
       if (hoverEffect.lift <= 0) {
         if (!cube.isReset) {
           resetCube(cube.element);
@@ -334,13 +333,22 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         }
       }
     }
-  }, [isPlaying, active, spotX, spotY, slots]);
+  }, [isPlaying, active, proximityEnabled, spotX, spotY, rippleRadius, maxLift, slots]);
+
+  const inlineStyles = {
+    "--u": `${scaleUnit}px`,
+    ...(overrideColors ? {
+      "--c1": c1,
+      "--c2": c2,
+      "--c3": c3,
+    } : {})
+  } as CSSProperties;
 
   return (
     <div
       ref={wrapRef}
       className="mode-cube-pattern"
-      style={{ "--u": `${U}px` } as CSSProperties}
+      style={inlineStyles}
       aria-hidden
     >
       {slots.map((slot) => (
