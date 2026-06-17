@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
+
 import { gsap, useGSAP, prefersReducedMotion, ScrollTrigger } from "@/lib/gsap";
 import { SITE } from "@/content/site";
 import { scrollToSection } from "@/lib/snap-scroll";

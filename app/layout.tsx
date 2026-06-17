@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Navbar from "@/app/components/navbar";
+import { VibeButton } from "@/components/ui/VibeButton";
+import { VibeProvider } from "@/context/VibeContext";
 import Script from "next/script";
 import "@/styles/globals.css";
 import "@/styles/portfolio.css";
@@ -93,8 +95,11 @@ export default function RootLayout({ children }: RootLayoutProps): ReactNode {
         />
       </head>
       <body className="overflow-hidden bg-base text-ink">
-        <Navbar />
-        {children}
+        <VibeProvider>
+          <Navbar />
+          <VibeButton />
+          {children}
+        </VibeProvider>
       </body>
     </html>
   );
