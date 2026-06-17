@@ -31,7 +31,8 @@ function buildCubeGrid(width: number, height: number): CubeSlot[] {
         id: `${r}-${c}`,
         x,
         y: r * Y_STEP,
-        zIndex: r + 2,
+        // depth among cubes only — capped so rows never beat page content
+        zIndex: Math.min(r + 2, 8),
       });
     }
   }

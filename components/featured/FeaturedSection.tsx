@@ -48,7 +48,7 @@ export function FeaturedSection() {
     >
       <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
 
-      <div className="section-reveal relative z-10 flex w-full max-w-lg flex-col items-center gap-8">
+      <div className="section-reveal relative isolate z-20 flex w-full max-w-lg flex-col items-center gap-8">
         <p className="text-xs font-bold uppercase tracking-[0.28em] text-ink-faint">
           {SITE.hero.modeEyebrow}
         </p>

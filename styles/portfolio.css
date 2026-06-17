@@ -272,8 +272,10 @@
 .mode-cube-pattern {
   position: absolute;
   inset: 0;
+  z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  isolation: isolate; /* keep cube z-index inside this layer only */
   --cube-w: calc(var(--u) * 20);
   --cube-h: calc(var(--u) * 22);
   transition: --c1 0.6s ease, --c2 0.6s ease, --c3 0.6s ease;
