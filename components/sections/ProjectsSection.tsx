@@ -102,6 +102,7 @@ export function ProjectsSection() {
                       title="JoelEditz Video"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
+                      loading="lazy"
                     ></iframe>
                   </div>
                 </div>
@@ -146,6 +147,7 @@ export function ProjectsSection() {
                       title="Build2Learn Video"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
+                      loading="lazy"
                     ></iframe>
                   </div>
                 </div>
