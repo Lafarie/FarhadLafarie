@@ -9,6 +9,9 @@ import "@/styles/portfolio.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://farhad-lafarie.vercel.app"),
+  alternates: {
+    canonical: "/",
+  },
   title: "Farhad Lafarie - DevOps Engineer & Full-Stack Developer",
   description:
     "Experienced DevOps Engineer and Software Engineering undergraduate specializing in CI/CD pipelines, cloud infrastructure, and full-stack development. Explore my projects, skills, and experience.",
