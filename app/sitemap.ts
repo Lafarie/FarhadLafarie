@@ -6,19 +6,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: "https://farhad-lafarie.vercel.app",
+      url: "https://farhad-lafarie.vercel.app/",
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
-      url: "https://farhad-lafarie.vercel.app/portfolio",
+      url: "https://farhad-lafarie.vercel.app/portfolio/",
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: "https://farhad-lafarie.vercel.app/cv",
+      url: "https://farhad-lafarie.vercel.app/cv/",
       lastModified: currentDate,
       changeFrequency: "monthly",
       priority: 0.9,
