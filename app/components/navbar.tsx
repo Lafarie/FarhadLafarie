@@ -128,7 +128,7 @@ export default function Navbar() {
   );
 
   return (
-    <header ref={shellRef} className="pointer-events-none fixed inset-x-0 top-0 z-50">
+    <header ref={shellRef} className="pointer-events-none fixed inset-x-0 top-0 z-50 print:hidden">
       <nav ref={navRef} className="low-poly-nav pointer-events-auto mx-auto w-full max-w-6xl">
         <div className="relative mx-auto flex items-center justify-between px-3 py-3 sm:px-4">
           <Link href="/" className="inline-flex items-center gap-2" style={{ color: "#1a1a1a", fontWeight: 700, fontSize: "0.9rem", letterSpacing: "0.02em" }}>

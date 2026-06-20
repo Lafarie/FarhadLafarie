@@ -71,6 +71,9 @@ export function FeaturedSection() {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="low-poly-panel w-full flex-1 p-6 text-left sm:p-8 lg:p-8"
             >
+              <span className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-ink-dim/70">
+                Farhad Lafarie — DevOps & Full-Stack Portfolio
+              </span>
               <h1 className="low-poly-heading text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-3xl">
                 {modeConfig.tagline}
               </h1>

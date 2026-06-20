@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Farhad Lafarie - DevOps Engineer & Full-Stack Developer",
+  title: "Farhad Lafarie | DevOps & Full-Stack Developer Portfolio",
   description:
-    "Experienced DevOps Engineer and Software Engineering undergraduate specializing in CI/CD pipelines, cloud infrastructure, and full-stack development. Explore my projects, skills, and experience.",
+    "Explore the professional portfolio of Farhad Lafarie, a DevOps Engineer and Full-Stack Developer specializing in CI/CD, cloud infrastructure, containerization, and responsive web development.",
   keywords:
-    "DevOps Engineer, Full-Stack Developer, CI/CD, Docker, Kubernetes, React, Node.js, Cloud Infrastructure, Linux, GitLab",
+    "Farhad Lafarie Portfolio, DevOps Engineer, Full-Stack Developer, CI/CD, Docker, Kubernetes, React, Node.js, Cloud Infrastructure, Linux, GitLab",
   authors: [{ name: "Farhad Lafarie" }],
   creator: "Farhad Lafarie",
   icons: {
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
   openGraph: {
-    title: "Farhad Lafarie - DevOps Engineer & Full-Stack Developer",
+    title: "Farhad Lafarie | DevOps & Full-Stack Developer Portfolio",
     description:
-      "Experienced DevOps Engineer with hands-on expertise in CI/CD, cloud infrastructure, containerization, and full-stack development.",
+      "Explore the professional portfolio of Farhad Lafarie, a DevOps Engineer and Full-Stack Developer specializing in CI/CD, cloud infrastructure, containerization, and responsive web development.",
     url: "https://farhad-lafarie.vercel.app",
     siteName: "Farhad Lafarie Portfolio",
     images: [
@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "Farhad Lafarie - DevOps Engineer & Full-Stack Developer",
-//     description:
-//       "Experienced DevOps Engineer with hands-on expertise in CI/CD, cloud infrastructure, containerization, and full-stack development.",
-//     images: ["/logo.png"],
-//     creator: "@farhadlafarie",
-//   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Farhad Lafarie | DevOps & Full-Stack Developer Portfolio",
+    description:
+      "Explore the professional portfolio of Farhad Lafarie, a DevOps Engineer and Full-Stack Developer specializing in CI/CD, cloud infrastructure, containerization, and responsive web development.",
+    images: ["/logo.png"],
+    creator: "@farhadlafarie",
+  },
   manifest: "/manifest.json",
   robots: {
     index: true,
@@ -75,7 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps): ReactNode {
     "@type": "Person",
     name: "Farhad Lafarie",
     url: "https://farhad-lafarie.vercel.app",
-    image: "https://farhad-lafarie.vercel.app/og-image.png",
+    image: "https://farhad-lafarie.vercel.app/logo.png",
     jobTitle: ["DevOps Engineer", "Full-Stack Developer"],
     email: "farhadlafarie@gmail.com",
     telephone: "+94776350933",
