@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
       "Chat shopping assistant for Kapruka.com using MCP tools, a streaming agent, product cards, cart, and guest checkout. Supports English, Sinhala, and Tanglish.",
     image:
       "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=800&q=80",
-    link: "https://www.kapruka.com",
+    link: "https://kapruka-agra.vercel.app/",
     status: "Completed",
     tech: [
       "Next.js",
