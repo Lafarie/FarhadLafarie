@@ -25,7 +25,8 @@ export function ModePersonImage() {
             src={modeConfig.character.image}
             alt={modeConfig.character.alt}
             fill
-            className="object-cover"
+            unoptimized
+            className="object-contain p-2"
             priority
             sizes="(max-width: 640px) 280px, (max-width: 1024px) 300px, 300px"
           />
