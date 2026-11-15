@@ -145,4 +145,40 @@ export const PROJECTS: Project[] = [
     tech: ["WordPress", "WooCommerce", "PHP", "MySQL"],
     tags: ["developer", "content"],
   },
+  {
+    id: "tethered-depths",
+    title: "Tethered Depths",
+    description:
+      "High-octane vertical climber powered by a 3-cable tension winch mechanism. Built in Unity with custom rope physics, atmospheric sound design, and playable directly in the browser on itch.io.",
+    image:
+      "https://img.itch.zone/aW1nLzI5OTY4OTUyLmpwZw==/original/wz%2F%2BgX.jpg",
+    link: "https://pun15h3r.itch.io/tethered-depths",
+    status: "Completed",
+    tech: ["Unity", "C#", "WebGL", "Physics Simulation", "itch.io"],
+    tags: ["developer", "game-dev", "content"],
+  },
+  {
+    id: "fort-siege",
+    title: "Fort Siege",
+    description:
+      "Multiplayer tactical artillery siege game built in Unity with browser WebGL deployment on Vercel, real-time networking, and destructible defense mechanics.",
+    image:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
+    link: "https://fort-siege.vercel.app/",
+    status: "Completed",
+    tech: ["Unity", "C#", "WebGL", "Vercel", "Multiplayer"],
+    tags: ["developer", "game-dev", "full-stack"],
+  },
+  {
+    id: "levelstair-punisher",
+    title: "Levelstair Game Dev Profile (@punisher)",
+    description:
+      "Verified game developer portal profile on Sri Lanka's official game development platform, showcasing indie titles, game jam entries, and community builds.",
+    image:
+      "https://portal.levelstair.com/og-image.webp",
+    link: "https://portal.levelstair.com/user/punisher",
+    status: "Completed",
+    tech: ["Game Dev", "Community", "Game Jams", "Levelstair"],
+    tags: ["developer", "game-dev", "content"],
+  },
 ];

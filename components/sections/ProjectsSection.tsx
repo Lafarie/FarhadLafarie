@@ -3,7 +3,7 @@
 import { SITE } from "@/content/site";
 import type { PortfolioMode, Project } from "@/content/types";
 import { useMode } from "@/context/ModeContext";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Gamepad2 } from "lucide-react";
 
 function matchesMode(project: Project, mode: PortfolioMode): boolean {
   if (mode === "devops") return project.tags.includes("devops");
@@ -23,8 +23,10 @@ export function ProjectsSection() {
     .filter((p): p is Project => Boolean(p));
 
   const featuredIds = new Set(featured.map((p) => p.id));
+  const games = SITE.projects.filter((p) => p.tags.includes("game-dev"));
+  const gameIds = new Set(games.map((p) => p.id));
   const rest = SITE.projects.filter(
-    (p) => !featuredIds.has(p.id) && matchesMode(p, mode),
+    (p) => !featuredIds.has(p.id) && !gameIds.has(p.id) && matchesMode(p, mode),
   );
 
   return (
@@ -126,6 +128,80 @@ export function ProjectsSection() {
                 </li>
               ))}
             </ul>
+          </div>
+        ) : null}
+
+        {/* Games Built & Game Development Section */}
+        {games.length > 0 ? (
+          <div className="mt-16 border-t border-line/30 pt-12">
+            <div className="flex items-center gap-2">
+              <Gamepad2 className="text-saffron" size={20} />
+              <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-saffron">
+                Games Built &amp; Game Dev
+              </h3>
+            </div>
+            <p className="mt-1 text-xs text-ink-dim">
+              Playable browser builds, custom physics mechanics, multiplayer networking, and game dev community portals.
+            </p>
+
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {games.map((game) => (
+                <div
+                  key={game.id}
+                  className="low-poly-card flex flex-col justify-between overflow-hidden p-5"
+                >
+                  <div>
+                    {game.image ? (
+                      <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-line bg-black/40">
+                        <img
+                          src={game.image}
+                          alt={game.title}
+                          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
+
+                    <div className="mt-4 flex items-start justify-between gap-2">
+                      <h4 className="font-semibold text-ink">{game.title}</h4>
+                      <span className="shrink-0 rounded-full border border-line/60 bg-surface px-2 py-0.5 text-[10px] font-semibold text-ink-faint">
+                        {game.status}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-xs leading-relaxed text-ink-dim">
+                      {game.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-5">
+                    <div className="flex flex-wrap gap-1">
+                      {game.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="rounded-full border border-line px-2 py-0.5 text-[10px] text-ink-faint"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+
+                    {game.link ? (
+                      <a
+                        href={game.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-grape hover:text-saffron"
+                      >
+                        {game.id === "levelstair-punisher"
+                          ? "View Dev Profile"
+                          : "Play in Browser"}{" "}
+                        <ExternalLink size={12} />
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : null}
 
