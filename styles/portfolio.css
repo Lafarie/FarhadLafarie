@@ -846,9 +846,9 @@
   box-shadow: 0 0 0 #1a1a1a;
 }
 
-/* Mobile Signal Strength Indicator */
+/* Mobile Signal Strength Indicator (instant discrete hardware segments) */
 .te-signal-bar {
-  transition: opacity 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+  transition: none;
 }
 
 /* ── 4. Architect's Field Dossier & Clipboard (Right Unit) ── */

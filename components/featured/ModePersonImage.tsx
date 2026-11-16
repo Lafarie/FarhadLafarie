@@ -15,28 +15,27 @@ export function ModePersonImage() {
   const { isPlaying, toggle } = useVibe();
 
   useEffect(() => {
-    // Mobile signal strength sequence:
-    // Holds at full (5 bars) for 3.4s -> dips to 4 (450ms) -> dips to 3 (450ms) -> holds at low (2 bars) for 2s -> recovers to 3 (450ms) -> 4 (450ms) -> back to 5
-    const sequence = [
-      { bars: 5, duration: 3400 },
-      { bars: 4, duration: 450 },
-      { bars: 3, duration: 450 },
-      { bars: 2, duration: 2000 },
-      { bars: 3, duration: 450 },
-      { bars: 4, duration: 450 },
-    ];
-    let step = 0;
     let timer: NodeJS.Timeout;
 
-    const tick = () => {
-      setSignalBars(sequence[step].bars);
+    const scheduleNext = () => {
+      // Random hold time between 2500ms and 5500ms
+      const duration = Math.floor(Math.random() * 3000) + 2500;
+
       timer = setTimeout(() => {
-        step = (step + 1) % sequence.length;
-        tick();
-      }, sequence[step].duration);
+        // Random count between 1 and 5 (biased toward strong reception 4 and 5)
+        const pool = [2, 3, 4, 5, 5, 4, 3, 5, 4, 2];
+        setSignalBars((prev) => {
+          let next = pool[Math.floor(Math.random() * pool.length)];
+          if (next === prev) {
+            next = prev === 5 ? 3 : 5;
+          }
+          return next;
+        });
+        scheduleNext();
+      }, duration);
     };
 
-    tick();
+    scheduleNext();
     return () => clearTimeout(timer);
   }, []);
 
@@ -219,9 +218,9 @@ export function ModePersonImage() {
                   key={i}
                   style={{ height: `${h}px` }}
                   className={cn(
-                    "w-[3.5px] rounded-[1px] transition-all duration-300",
+                    "w-[3.5px] rounded-[1px]",
                     isLit
-                      ? "bg-emerald-500 shadow-[0_0_3px_rgba(16,185,129,0.5)] opacity-100"
+                      ? "bg-emerald-500 opacity-100"
                       : "bg-zinc-300/80 border border-zinc-400/30 opacity-35"
                   )}
                 />
@@ -234,15 +233,23 @@ export function ModePersonImage() {
             </span>
             <span
               className={cn(
-                "font-mono text-[7px] font-bold leading-none mt-0.5 transition-colors duration-300",
-                activeBars >= 4 ? "text-emerald-600 font-extrabold" : "text-amber-600 font-bold"
+                "font-mono text-[7px] font-bold leading-none mt-0.5",
+                activeBars >= 4
+                  ? "text-emerald-600 font-extrabold"
+                  : activeBars === 3
+                    ? "text-amber-600 font-bold"
+                    : "text-orange-600 font-bold"
               )}
             >
               {isPlaying
                 ? "5G // BOOST"
-                : activeBars >= 4
+                : activeBars === 5
                   ? "5G // FULL"
-                  : "4G // FAIR"}
+                  : activeBars === 4
+                    ? "5G // GOOD"
+                    : activeBars === 3
+                      ? "4G // FAIR"
+                      : "3G // LOW"}
             </span>
           </div>
         </div>
