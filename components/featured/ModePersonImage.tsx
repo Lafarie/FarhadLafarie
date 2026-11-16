@@ -1,9 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { Play, Pause, Settings } from "lucide-react";
+import { useVibe } from "@/context/VibeContext";
+import { VibeSettingsModal } from "@/components/ui/VibeSettingsModal";
+import { cn } from "@/lib/utils";
 
 export function ModePersonImage() {
   const [knobRotations, setKnobRotations] = useState([25, 70, 110]);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const { isPlaying, toggle } = useVibe();
 
   const rotateKnob = (index: number) => {
     setKnobRotations((prev) => {
@@ -96,7 +102,7 @@ export function ModePersonImage() {
       </div>
 
       {/* Tactile Hardware Rotary Dial Strip */}
-      <div className="te-dial-strip">
+      <div className="te-dial-strip px-8 py-2.5">
         <div
           className="te-rotary-dial"
           onClick={() => rotateKnob(0)}
@@ -130,20 +136,72 @@ export function ModePersonImage() {
           />
           <span className="te-dial-label">RATE</span>
         </div>
+      </div>
 
-        {/* Live Mini LED Audio Level Meter */}
-        <div className="flex flex-col items-center gap-1 pl-1 border-l border-zinc-400">
+      {/* Hardware Master Transport Deck: Vibe Controls + Signal VU Meter */}
+      <div className="te-transport-deck flex items-center justify-between px-7 py-2.5 border-t-2 border-zinc-900 select-none">
+        {/* Left: Tactile Vibe Controls */}
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={toggle}
+            className={cn("te-vibe-btn", isPlaying ? "is-playing" : "is-paused")}
+            title={isPlaying ? "Pause 3D kinetic background wave" : "Engage 3D kinetic background wave"}
+          >
+            {isPlaying ? (
+              <>
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <Pause size={10} fill="currentColor" />
+                <span>VIBE LIVE</span>
+              </>
+            ) : (
+              <>
+                <span className="h-1.5 w-1.5 rounded-full bg-zinc-400 shrink-0" />
+                <Play size={10} fill="currentColor" />
+                <span>VIBE 3D</span>
+              </>
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsSettingsOpen(true)}
+            className="te-vibe-settings-btn"
+            title="3D Ripple Calibration"
+            aria-label="3D Ripple Calibration"
+          >
+            <Settings size={11} />
+          </button>
+        </div>
+
+        {/* Right: Audio / Kinetic Signal Level VU Meter */}
+        <div
+          className="flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group"
+          onClick={toggle}
+          title={isPlaying ? "Click to pause signal" : "Click to activate signal"}
+        >
           <div className="flex gap-0.5 h-4 items-end" aria-label="Signal level meter">
-            <span className="w-1.5 h-2 bg-emerald-500 rounded-2xs" />
-            <span className="w-1.5 h-3 bg-emerald-500 rounded-2xs" />
-            <span className="w-1.5 h-4 bg-emerald-500 rounded-2xs" />
-            <span className="w-1.5 h-3.5 bg-yellow-400 rounded-2xs animate-pulse" />
-            <span className="w-1.5 h-2 bg-orange-500 rounded-2xs" />
-            <span className="w-1.5 h-1 bg-red-500 rounded-2xs" />
+            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-1" : "h-2 opacity-50")} />
+            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-2" : "h-2.5 opacity-50")} />
+            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-3" : "h-3 opacity-40")} />
+            <span className={cn("w-1.5 rounded-2xs bg-yellow-400", isPlaying ? "vu-bar-active-4" : "h-2 opacity-30")} />
+            <span className={cn("w-1.5 rounded-2xs bg-orange-500", isPlaying ? "vu-bar-active-5" : "h-1.5 opacity-20")} />
+            <span className={cn("w-1.5 rounded-2xs bg-red-500", isPlaying ? "vu-bar-active-6" : "h-1 opacity-20")} />
           </div>
-          <span className="te-dial-label">SIGNAL</span>
+          <div className="flex flex-col text-left">
+            <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px]">SIGNAL</span>
+            <span className={cn("font-mono text-[7px] font-bold leading-none mt-0.5", isPlaying ? "text-emerald-600 font-extrabold" : "text-zinc-500")}>
+              {isPlaying ? "48 FPS" : "STANDBY"}
+            </span>
+          </div>
         </div>
       </div>
+
+      {/* 3D Kinetic Ripple Settings Modal */}
+      <VibeSettingsModal
+        open={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
     </div>
   );
 }

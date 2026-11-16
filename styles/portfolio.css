@@ -687,10 +687,10 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
-.te-hex-screw.top-left { top: 9px; left: 9px; }
-.te-hex-screw.top-right { top: 9px; right: 9px; }
-.te-hex-screw.bottom-left { bottom: 9px; left: 9px; }
-.te-hex-screw.bottom-right { bottom: 9px; right: 9px; }
+.te-hex-screw.top-left { top: 8px; left: 8px; }
+.te-hex-screw.top-right { top: 8px; right: 8px; }
+.te-hex-screw.bottom-left { bottom: 8px; left: 8px; }
+.te-hex-screw.bottom-right { bottom: 8px; right: 8px; }
 
 /* CRT Screen Monitor Bezel */
 .te-monitor-bezel {
@@ -767,6 +767,99 @@
   text-transform: uppercase;
   color: #52525b;
 }
+
+/* ── Hardware Master Transport Deck (Vibe Controls + Signal VU Meter) ── */
+.te-transport-deck {
+  background: #ebeae0;
+  border-top: 2px solid #1a1a1a;
+}
+
+.te-vibe-btn {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  height: 27px;
+  padding: 0 0.55rem;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid #1a1a1a;
+}
+
+.te-vibe-btn.is-paused {
+  background: #ffffff;
+  color: #27272a;
+  box-shadow: 0 2px 0 #1a1a1a;
+}
+
+.te-vibe-btn.is-paused:hover {
+  background: #f4f4f5;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 #1a1a1a;
+}
+
+.te-vibe-btn.is-playing {
+  background: #18181b;
+  color: #ffffff;
+  box-shadow: 0 1px 0 #000000;
+}
+
+.te-vibe-btn.is-playing:hover {
+  background: #27272a;
+}
+
+.te-vibe-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 #1a1a1a;
+}
+
+.te-vibe-settings-btn {
+  height: 27px;
+  width: 27px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #ffffff;
+  color: #3f3f46;
+  border: 1.5px solid #1a1a1a;
+  box-shadow: 0 2px 0 #1a1a1a;
+  transition: all 0.1s ease;
+}
+
+.te-vibe-settings-btn:hover {
+  background: #f4f4f5;
+  color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 #1a1a1a;
+}
+
+.te-vibe-settings-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 #1a1a1a;
+}
+
+/* Dynamic VU Meter Dance Keyframes */
+@keyframes vuDance1 { 0%, 100% { height: 8px; } 50% { height: 14px; } }
+@keyframes vuDance2 { 0%, 100% { height: 13px; } 50% { height: 7px; } }
+@keyframes vuDance3 { 0%, 100% { height: 16px; } 50% { height: 10px; } }
+@keyframes vuDance4 { 0%, 100% { height: 7px; } 50% { height: 15px; } }
+@keyframes vuDance5 { 0%, 100% { height: 12px; } 50% { height: 5px; } }
+@keyframes vuDance6 { 0%, 100% { height: 6px; } 50% { height: 13px; } }
+
+.vu-bar-active-1 { animation: vuDance1 0.42s ease-in-out infinite; }
+.vu-bar-active-2 { animation: vuDance2 0.52s ease-in-out infinite; }
+.vu-bar-active-3 { animation: vuDance3 0.38s ease-in-out infinite; }
+.vu-bar-active-4 { animation: vuDance4 0.58s ease-in-out infinite; }
+.vu-bar-active-5 { animation: vuDance5 0.48s ease-in-out infinite; }
+.vu-bar-active-6 { animation: vuDance6 0.44s ease-in-out infinite; }
 
 /* ── 4. Architect's Field Dossier & Clipboard (Right Unit) ── */
 .field-dossier-clipboard {

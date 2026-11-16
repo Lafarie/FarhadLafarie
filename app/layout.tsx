@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Navbar from "@/app/components/navbar";
-import { VibeButton } from "@/components/ui/VibeButton";
 import { VibeProvider } from "@/context/VibeContext";
 import Script from "next/script";
 import "@/styles/globals.css";
@@ -103,7 +102,6 @@ export default function RootLayout({ children }: RootLayoutProps): ReactNode {
       <body className="bg-base text-ink">
         <VibeProvider>
           <Navbar />
-          <VibeButton />
           {children}
         </VibeProvider>
       </body>
