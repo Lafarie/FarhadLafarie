@@ -20,9 +20,9 @@ export type VibeSettings = {
 
 const DEFAULT_SETTINGS: VibeSettings = {
   proximityEnabled: true,
-  scaleUnit: 10,
-  rippleRadius: 200,
-  maxLift: 10,
+  scaleUnit: 8.5,
+  rippleRadius: 220,
+  maxLift: 22,
   overrideColors: false,
   c1: "#ffd4d4", // Default highlight matching our pastel red dev tab
   c2: "#3d0a0a",

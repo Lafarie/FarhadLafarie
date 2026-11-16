@@ -39,6 +39,20 @@ export type Project = {
   tags: string[];
 };
 
+export type AchievementCategory = "all" | "award" | "hackathon" | "certification" | "community";
+
+export type Achievement = {
+  id: string;
+  title: string;
+  organization: string;
+  year: string;
+  badge: string;
+  category: "award" | "hackathon" | "certification" | "community";
+  description: string;
+  tags: string[];
+  link?: string;
+};
+
 export type Service = {
   id: string;
   title: string;
@@ -88,6 +102,7 @@ export type SiteContent = {
   };
   services: Service[];
   projects: Project[];
+  achievements: Achievement[];
   faq: {
     emptyMessage: string;
     emptyTitle: string;

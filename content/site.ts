@@ -1,6 +1,7 @@
 import { MODES } from "./modes";
 import { PROJECTS } from "./projects";
 import { SECTIONS } from "./sections";
+import { ACHIEVEMENTS } from "./achievements";
 import type { SiteContent } from "./types";
 
 export const SITE: SiteContent = {
@@ -70,6 +71,7 @@ export const SITE: SiteContent = {
     },
   ],
   projects: PROJECTS,
+  achievements: ACHIEVEMENTS,
   faq: {
     emptyTitle: "Nobody has asked a question yet",
     emptyMessage:
@@ -140,3 +142,5 @@ export { MODES, MODE_TAB_ORDER } from "./modes";
 export { SECTIONS } from "./sections";
 export { CV_VARIANTS, CV_VARIANT_ORDER } from "./cv";
 export type { CvVariant, CvVariantId } from "./cv";
+export { ACHIEVEMENTS } from "./achievements";
+export type { Achievement, AchievementCategory } from "./achievements";

@@ -1,9 +1,8 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useCallback, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useMode } from "@/context/ModeContext";
-import { LowPolyBackground } from "@/components/background/LowPolyBackground";
 import { ModePersonImage } from "./ModePersonImage";
 import { CvChooser } from "@/components/ui/CvChooser";
 import { cn } from "@/lib/utils";
@@ -12,18 +11,7 @@ import { motion } from "framer-motion";
 export function FeaturedSection() {
   const { modeConfig } = useMode();
   const sectionRef = useRef<HTMLElement>(null);
-  const [spot, setSpot] = useState({ x: 0, y: 0, active: false });
   const [cvOpen, setCvOpen] = useState(false);
-
-  const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
-    const rect = sectionRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setSpot({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
-  }, []);
-
-  const onPointerLeave = useCallback(() => {
-    setSpot((prev) => ({ ...prev, active: false }));
-  }, []);
 
   return (
     <>
@@ -33,7 +21,7 @@ export function FeaturedSection() {
         className={cn(
           "snap-section relative flex min-h-[100dvh] flex-col items-center justify-center",
           "px-4 pb-12 pt-24 sm:px-8 md:px-12",
-          "mode-bg transition-colors duration-500",
+          "transition-colors duration-500",
         )}
         style={
           {
@@ -42,16 +30,12 @@ export function FeaturedSection() {
             "--mode-surface": modeConfig.theme.surface,
           } as CSSProperties
         }
-        onPointerMove={onPointerMove}
-        onPointerLeave={onPointerLeave}
       >
-        <LowPolyBackground spotX={spot.x} spotY={spot.y} active={spot.active} />
-
         <div className="section-reveal relative isolate z-20 flex w-full max-w-6xl flex-col items-center">
           {/* Side-by-side on lg+, stacked on mobile */}
           <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-stretch lg:gap-8">
             {/* Left Column: Teenage Engineering Hardware System Console */}
-            <div className="w-full max-w-[320px] shrink-0 sm:max-w-[340px] lg:w-[320px] lg:max-w-none xl:w-[360px]">
+            <div className="w-full max-w-[280px] shrink-0 sm:max-w-[300px] lg:w-[285px] lg:max-w-none xl:w-[315px]">
               <ModePersonImage />
             </div>
 

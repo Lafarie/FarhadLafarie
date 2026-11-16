@@ -3,8 +3,9 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
 import { useVibe } from "@/context/VibeContext";
+import { cn } from "@/lib/utils";
 
-type Props = { spotX: number; spotY: number; active: boolean };
+type Props = { spotX?: number; spotY?: number; active?: boolean };
 
 type CubeSlot = { id: string; x: number; y: number; zIndex: number };
 
@@ -15,21 +16,6 @@ type CubeCache = {
   isReset?: boolean;
   lastLift?: number;
 };
-
-type WaveVariant =
-  | "left-to-right"
-  | "right-to-left"
-  | "top-left-to-bottom-right"
-  | "circle-out"
-  | "circle-in";
-
-const VARIANTS: WaveVariant[] = [
-  "left-to-right",
-  "right-to-left",
-  "top-left-to-bottom-right",
-  "circle-out",
-  "circle-in"
-];
 
 function buildCubeGrid(width: number, height: number, scaleUnit: number): CubeSlot[] {
   const xStep = scaleUnit * 16.9;
@@ -46,7 +32,7 @@ function buildCubeGrid(width: number, height: number, scaleUnit: number): CubeSl
         id: `${r}-${c}`,
         x,
         y: r * yStep,
-        // depth among cubes only  -  capped so rows never beat page content
+        // depth among cubes only - capped so rows never beat page content
         zIndex: Math.min(r + 2, 8),
       });
     }
@@ -85,29 +71,7 @@ function getEffectForPoint(cube: CubeCache, x: number, y: number, radius: number
   return { lift: ease * maxLift, ease };
 }
 
-// Optimized wave distance calculation using precomputed frame variables
-function getFastWaveDistance(
-  cube: CubeCache,
-  variant: WaveVariant,
-  waveParam: number,
-  diagDx: number,
-  diagDy: number,
-  screenCenterX: number,
-  screenCenterY: number
-): number {
-  if (variant === "left-to-right" || variant === "right-to-left") {
-    return Math.abs(cube.centerX - waveParam);
-  }
-  if (variant === "top-left-to-bottom-right") {
-    const proj = cube.centerX * diagDx + cube.centerY * diagDy;
-    return Math.abs(proj - waveParam);
-  }
-  // circle-out and circle-in
-  const cubeRadius = fastHypot(cube.centerX - screenCenterX, cube.centerY - screenCenterY);
-  return Math.abs(cubeRadius - waveParam);
-}
-
-export function LowPolyBackground({ spotX, spotY, active }: Props) {
+export function LowPolyBackground({ spotX, spotY, active }: Props = {}) {
   const { isPlaying, settings } = useVibe();
   const { proximityEnabled, scaleUnit, rippleRadius, maxLift, overrideColors, c1, c2, c3 } = settings;
 
@@ -115,16 +79,35 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
   const cacheRef = useRef<CubeCache[]>([]);
   const [slots, setSlots] = useState<CubeSlot[]>([]);
 
-  // Refs to track hover state to prevent mouse movements from resetting the RAF loop
-  const activeRef = useRef(active);
-  const spotXRef = useRef(spotX);
-  const spotYRef = useRef(spotY);
+  // Refs to track pointer coordinates
+  const activeRef = useRef(Boolean(active));
+  const spotXRef = useRef(spotX ?? -9999);
+  const spotYRef = useRef(spotY ?? -9999);
 
+  // Sync props if provided
   useEffect(() => {
-    activeRef.current = active;
-    spotXRef.current = spotX;
-    spotYRef.current = spotY;
+    if (active !== undefined) activeRef.current = active;
+    if (spotX !== undefined) spotXRef.current = spotX;
+    if (spotY !== undefined) spotYRef.current = spotY;
   }, [active, spotX, spotY]);
+
+  // Global window pointer listener so moving mouse anywhere on the page animates proximity
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      spotXRef.current = e.clientX;
+      spotYRef.current = e.clientY;
+      activeRef.current = true;
+    };
+    const onLeave = () => {
+      activeRef.current = false;
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerleave", onLeave, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerleave", onLeave);
+    };
+  }, []);
 
   // Build staggered isometric grid on resize or scaleUnit changes
   useEffect(() => {
@@ -132,13 +115,19 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     if (!wrap) return;
 
     const update = () => {
-      setSlots(buildCubeGrid(wrap.clientWidth, wrap.clientHeight, scaleUnit));
+      const width = wrap.clientWidth || window.innerWidth;
+      const height = wrap.clientHeight || window.innerHeight;
+      setSlots(buildCubeGrid(width, height, scaleUnit));
     };
 
     update();
     const ro = new ResizeObserver(update);
     ro.observe(wrap);
-    return () => ro.disconnect();
+    window.addEventListener("resize", update, { passive: true });
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", update);
+    };
   }, [scaleUnit]);
 
   // Cache cube centres for distance lookup (re-triggered when grid rebuilds or scaleUnit shifts)
@@ -164,80 +153,27 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     });
   }, [slots, scaleUnit]);
 
-  // Hook 1: Vibe play sweep loop (no hover dependency in array to prevent resets)
+  // Hook 1: VIBE 3D KINETIC ANIMATION (Immediate, tactile, undulating 3D harmonic waves)
   useEffect(() => {
     if (!isPlaying) return;
 
     const cubes = cacheRef.current;
     if (cubes.length === 0) return;
 
-    const waveRadius = rippleRadius * 1.25;
+    const effectiveLift = Math.max(maxLift, 22);
     let animationFrameId: number;
     let startTime: number | null = null;
-    const sweepDuration = 16000; // Slowed 16s sweep
-
-    let lastCycle = -1;
-    const variantRef = { current: VARIANTS[0] };
 
     const tick = (time: number) => {
       if (!startTime) startTime = time;
       const elapsed = time - startTime;
-      const currentCycle = Math.floor(elapsed / sweepDuration);
-      const progress = (elapsed % sweepDuration) / sweepDuration;
+      const t = elapsed / 1000; // seconds
 
       const wrap = wrapRef.current;
       const width = wrap ? wrap.clientWidth : window.innerWidth;
       const height = wrap ? wrap.clientHeight : window.innerHeight;
-      const variant = variantRef.current;
-
-      // Select a new variant when a cycle completes
-      if (currentCycle !== lastCycle) {
-        lastCycle = currentCycle;
-        const choices = VARIANTS.filter((v) => v !== variantRef.current);
-        variantRef.current = choices[Math.floor(Math.random() * choices.length)];
-      }
-
-      // Precompute animation parameters once per frame instead of inside loop
-      const p1 = progress;
-      const p2 = (progress - 0.125 + 1.0) % 1.0;
-
-      let waveParam1 = 0;
-      let waveParam2 = 0;
-      let diagDx = 0;
-      let diagDy = 0;
-      let screenCenterX = 0;
-      let screenCenterY = 0;
-
-      if (variant === "left-to-right") {
-        const startX = -waveRadius;
-        const endX = width + waveRadius;
-        waveParam1 = startX + p1 * (endX - startX);
-        waveParam2 = startX + p2 * (endX - startX);
-      } else if (variant === "right-to-left") {
-        const startX = width + waveRadius;
-        const endX = -waveRadius;
-        waveParam1 = startX + p1 * (endX - startX);
-        waveParam2 = startX + p2 * (endX - startX);
-      } else if (variant === "top-left-to-bottom-right") {
-        const diag = fastHypot(width, height);
-        diagDx = width / diag;
-        diagDy = height / diag;
-        const startProj = -waveRadius;
-        const endProj = diag + waveRadius;
-        waveParam1 = startProj + p1 * (endProj - startProj);
-        waveParam2 = startProj + p2 * (endProj - startProj);
-      } else if (variant === "circle-out" || variant === "circle-in") {
-        screenCenterX = width / 2;
-        screenCenterY = height / 2;
-        const maxCircleRadius = fastHypot(screenCenterX, screenCenterY) + waveRadius;
-        if (variant === "circle-out") {
-          waveParam1 = p1 * maxCircleRadius;
-          waveParam2 = p2 * maxCircleRadius;
-        } else {
-          waveParam1 = (1.0 - p1) * maxCircleRadius;
-          waveParam2 = (1.0 - p2) * maxCircleRadius;
-        }
-      }
+      const centerX = width * 0.4;
+      const centerY = height * 0.45;
 
       // Access latest hover inputs from refs
       const isHoverActive = activeRef.current;
@@ -245,48 +181,40 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
       const hY = spotYRef.current;
 
       for (const cube of cubes) {
-        const hoverEffect = (isHoverActive && proximityEnabled)
-          ? getEffectForPoint(cube, hX, hY, rippleRadius, maxLift)
-          : { lift: 0, ease: 0 };
-        
-        // Optimized distance calculations
-        const dist1 = getFastWaveDistance(cube, variant, waveParam1, diagDx, diagDy, screenCenterX, screenCenterY);
-        const dist2 = getFastWaveDistance(cube, variant, waveParam2, diagDx, diagDy, screenCenterX, screenCenterY);
+        // Multi-frequency harmonic kinetic surface wave
+        const wave1 = Math.sin(t * 2.8 - cube.centerX * 0.0032 - cube.centerY * 0.0024);
+        const wave2 = Math.cos(t * 1.9 + cube.centerX * 0.0026 - cube.centerY * 0.0035);
 
-        let waveLift1 = 0;
-        let waveEase1 = 0;
-        if (dist1 < waveRadius) {
-          const factor = 1 - dist1 / waveRadius;
-          waveEase1 = factor * factor * (3 - 2 * factor);
-          waveLift1 = waveEase1 * maxLift;
-        }
+        // Continuous radial ripple pulsing outward from console center
+        const radialDist = fastHypot(cube.centerX - centerX, cube.centerY - centerY);
+        const wave3 = Math.sin(t * 3.4 - radialDist * 0.006);
 
-        let waveLift2 = 0;
-        let waveEase2 = 0;
-        if (dist2 < waveRadius) {
-          const factor = 1 - dist2 / waveRadius;
-          waveEase2 = factor * factor * (3 - 2 * factor);
-          waveLift2 = waveEase2 * maxLift;
-        }
+        // Combine harmonic waves with base elevation
+        const combined = wave1 * 0.45 + wave2 * 0.35 + wave3 * 0.4 + 0.35;
+        const waveLift = Math.max(0, combined) * effectiveLift;
+        const waveEase = Math.min(1, Math.max(0, combined));
 
-        const waveLift = Math.max(waveLift1, waveLift2);
-        const waveEase = Math.max(waveEase1, waveEase2);
+        // Proximity hover ripple
+        const hoverEffect =
+          isHoverActive && proximityEnabled
+            ? getEffectForPoint(cube, hX, hY, rippleRadius, effectiveLift)
+            : { lift: 0, ease: 0 };
 
         const lift = Math.max(hoverEffect.lift, waveLift);
         const ease = Math.max(hoverEffect.ease, waveEase);
 
-        if (lift <= 0) {
+        if (lift <= 0.2) {
           if (!cube.isReset) {
             resetCube(cube.element);
             cube.isReset = true;
             cube.lastLift = 0;
           }
         } else {
-          // DOM write throttling: only apply if state transitioned or lift value shifted noticeably
+          // Direct 60fps hardware-accelerated transform & dynamic lighting
           if (cube.isReset || Math.abs((cube.lastLift ?? 0) - lift) > 0.05) {
-            cube.element.style.transform = `translateY(-${lift}px) translateZ(0)`;
-            cube.element.style.filter = `brightness(${1 + ease * 0.3})`;
-            cube.element.style.setProperty("--sheen-offset", `${ease * 200 - 100}%`);
+            cube.element.style.transform = `translate3d(0, -${lift.toFixed(1)}px, 0)`;
+            cube.element.style.filter = `brightness(${(1 + ease * 0.42).toFixed(2)}) contrast(${(1 + ease * 0.15).toFixed(2)})`;
+            cube.element.style.setProperty("--sheen-offset", `${(ease * 180 - 75).toFixed(1)}%`);
             cube.isReset = false;
             cube.lastLift = lift;
           }
@@ -303,21 +231,26 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
     };
   }, [isPlaying, proximityEnabled, rippleRadius, maxLift, slots]);
 
-  // Hook 2: Optimized standard hover-only path (when vibe is paused)
+  // Hook 2: Standard hover-only path (when vibe is paused)
   useEffect(() => {
     if (isPlaying) return;
 
     const cubes = cacheRef.current;
     if (cubes.length === 0) return;
 
-    if (!active || !proximityEnabled) {
+    const isHoverActive = activeRef.current;
+    if (!isHoverActive || !proximityEnabled) {
       cleanCubes(cubes);
       return;
     }
 
+    const effectiveLift = Math.max(maxLift, 18);
+    const hX = spotXRef.current;
+    const hY = spotYRef.current;
+
     for (const cube of cubes) {
-      const hoverEffect = getEffectForPoint(cube, spotX, spotY, rippleRadius, maxLift);
-      if (hoverEffect.lift <= 0) {
+      const hoverEffect = getEffectForPoint(cube, hX, hY, rippleRadius, effectiveLift);
+      if (hoverEffect.lift <= 0.2) {
         if (!cube.isReset) {
           resetCube(cube.element);
           cube.isReset = true;
@@ -325,9 +258,9 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
         }
       } else {
         if (cube.isReset || Math.abs((cube.lastLift ?? 0) - hoverEffect.lift) > 0.05) {
-          cube.element.style.transform = `translateY(-${hoverEffect.lift}px) translateZ(0)`;
-          cube.element.style.filter = `brightness(${1 + hoverEffect.ease * 0.3})`;
-          cube.element.style.setProperty("--sheen-offset", `${hoverEffect.ease * 200 - 100}%`);
+          cube.element.style.transform = `translate3d(0, -${hoverEffect.lift.toFixed(1)}px, 0)`;
+          cube.element.style.filter = `brightness(${(1 + hoverEffect.ease * 0.35).toFixed(2)})`;
+          cube.element.style.setProperty("--sheen-offset", `${(hoverEffect.ease * 200 - 100).toFixed(1)}%`);
           cube.isReset = false;
           cube.lastLift = hoverEffect.lift;
         }
@@ -337,17 +270,19 @@ export function LowPolyBackground({ spotX, spotY, active }: Props) {
 
   const inlineStyles = {
     "--u": `${scaleUnit}px`,
-    ...(overrideColors ? {
-      "--c1": c1,
-      "--c2": c2,
-      "--c3": c3,
-    } : {})
+    ...(overrideColors
+      ? {
+          "--c1": c1,
+          "--c2": c2,
+          "--c3": c3,
+        }
+      : {}),
   } as CSSProperties;
 
   return (
     <div
       ref={wrapRef}
-      className="mode-cube-pattern"
+      className={cn("mode-cube-pattern", isPlaying && "is-playing")}
       style={inlineStyles}
       aria-hidden
     >
