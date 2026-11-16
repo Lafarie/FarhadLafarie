@@ -176,22 +176,25 @@ export function ModePersonImage() {
 
         {/* Right: Audio / Kinetic Signal Level VU Meter */}
         <div
-          className="flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group"
+          className={cn(
+            "flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group",
+            isPlaying && "is-vibe-active"
+          )}
           onClick={toggle}
-          title={isPlaying ? "Click to pause signal" : "Click to activate signal"}
+          title={isPlaying ? "Click to calm signal" : "Click to boost signal"}
         >
-          <div className="flex gap-0.5 h-4 items-end" aria-label="Signal level meter">
-            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-1" : "h-2 opacity-50")} />
-            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-2" : "h-2.5 opacity-50")} />
-            <span className={cn("w-1.5 rounded-2xs bg-emerald-500", isPlaying ? "vu-bar-active-3" : "h-3 opacity-40")} />
-            <span className={cn("w-1.5 rounded-2xs bg-yellow-400", isPlaying ? "vu-bar-active-4" : "h-2 opacity-30")} />
-            <span className={cn("w-1.5 rounded-2xs bg-orange-500", isPlaying ? "vu-bar-active-5" : "h-1.5 opacity-20")} />
-            <span className={cn("w-1.5 rounded-2xs bg-red-500", isPlaying ? "vu-bar-active-6" : "h-1 opacity-20")} />
+          <div className="flex gap-0.5 h-5 items-end" aria-label="Signal level meter">
+            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-1" />
+            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-2" />
+            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-3" />
+            <span className="w-1.5 rounded-2xs bg-yellow-400 te-signal-bar-4" />
+            <span className="w-1.5 rounded-2xs bg-orange-500 te-signal-bar-5" />
+            <span className="w-1.5 rounded-2xs bg-red-500 te-signal-bar-6" />
           </div>
           <div className="flex flex-col text-left">
             <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px]">SIGNAL</span>
             <span className={cn("font-mono text-[7px] font-bold leading-none mt-0.5", isPlaying ? "text-emerald-600 font-extrabold" : "text-zinc-500")}>
-              {isPlaying ? "48 FPS" : "STANDBY"}
+              {isPlaying ? "48 FPS" : "ONLINE"}
             </span>
           </div>
         </div>
