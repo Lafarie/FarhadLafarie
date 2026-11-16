@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Play, Pause, Settings } from "lucide-react";
 import { useVibe } from "@/context/VibeContext";
 import { VibeSettingsModal } from "@/components/ui/VibeSettingsModal";
@@ -12,6 +12,7 @@ export function ModePersonImage() {
   const [knobRotations, setKnobRotations] = useState([25, 70, 110]);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [signalBars, setSignalBars] = useState(5);
+  const lastBarRef = useRef(5);
   const { isPlaying, toggle } = useVibe();
 
   useEffect(() => {
@@ -22,15 +23,14 @@ export function ModePersonImage() {
       const duration = Math.floor(Math.random() * 3000) + 2500;
 
       timer = setTimeout(() => {
-        // Random count between 1 and 5 (biased toward strong reception 4 and 5)
-        const pool = [2, 3, 4, 5, 5, 4, 3, 5, 4, 2];
-        setSignalBars((prev) => {
-          let next = pool[Math.floor(Math.random() * pool.length)];
-          if (next === prev) {
-            next = prev === 5 ? 3 : 5;
-          }
-          return next;
-        });
+        // Exclude current level so it NEVER repeats the same sequence in a row
+        const candidates = [2, 3, 4, 5].filter((n) => n !== lastBarRef.current);
+        // Weight 5 and 4 slightly higher for realistic mobile reception
+        const weighted = candidates.flatMap((n) => (n >= 4 ? [n, n] : [n]));
+        const next = weighted[Math.floor(Math.random() * weighted.length)];
+
+        lastBarRef.current = next;
+        setSignalBars(next);
         scheduleNext();
       }, duration);
     };
@@ -204,13 +204,13 @@ export function ModePersonImage() {
           </button>
         </div>
 
-        {/* Right: Cellular Mobile Signal Strength Meter */}
+        {/* Right: Cellular Mobile Signal Strength Meter (Fixed size so it never shifts layout) */}
         <div
-          className="flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group"
+          className="flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group shrink-0 w-[90px] h-7 select-none"
           onClick={toggle}
           title={isPlaying ? "Signal Locked to 5G Boost (Click to calm)" : "Click to boost signal"}
         >
-          <div className="flex gap-[2px] h-5 items-end" aria-label="Mobile signal strength">
+          <div className="flex gap-[2px] h-5 w-[26px] items-end shrink-0" aria-label="Mobile signal strength">
             {BAR_HEIGHTS.map((h, i) => {
               const isLit = i + 1 <= activeBars;
               return (
@@ -218,7 +218,7 @@ export function ModePersonImage() {
                   key={i}
                   style={{ height: `${h}px` }}
                   className={cn(
-                    "w-[3.5px] rounded-[1px]",
+                    "w-[3.5px] rounded-[1px] shrink-0",
                     isLit
                       ? "bg-emerald-500 opacity-100"
                       : "bg-zinc-300/80 border border-zinc-400/30 opacity-35"
@@ -227,13 +227,13 @@ export function ModePersonImage() {
               );
             })}
           </div>
-          <div className="flex flex-col text-left">
-            <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px]">
+          <div className="flex flex-col text-left shrink-0 w-[50px] overflow-hidden">
+            <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px] truncate">
               SIGNAL
             </span>
             <span
               className={cn(
-                "font-mono text-[7px] font-bold leading-none mt-0.5",
+                "font-mono text-[7px] font-bold leading-none mt-0.5 truncate tabular-nums",
                 activeBars >= 4
                   ? "text-emerald-600 font-extrabold"
                   : activeBars === 3
