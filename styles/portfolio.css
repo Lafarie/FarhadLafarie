@@ -518,3 +518,642 @@
   transform: scale(1.18);
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   STYLE B + D FUSION: TEENAGE ENGINEERING CONSOLE & ARCHITECT FIELD DOSSIER
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Industrial Hardware Rack Navbar ── */
+.te-navbar-rack {
+  position: relative;
+  background: #f7f6f0;
+  border: 2px solid #1a1a1a;
+  border-top-width: 3px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: max-width 0.4s ease, margin-top 0.4s ease, border-radius 0.4s ease;
+}
+
+/* Precision etched ruler scale */
+.te-ruler-scale {
+  background: #ebeae2;
+  border-bottom: 1.5px solid #1a1a1a;
+  background-image:
+    repeating-linear-gradient(to right, rgba(20, 20, 20, 0.4) 0, rgba(20, 20, 20, 0.4) 1px, transparent 1px, transparent 8px),
+    repeating-linear-gradient(to right, rgba(20, 20, 20, 0.8) 0, rgba(20, 20, 20, 0.8) 1.5px, transparent 1.5px, transparent 40px);
+  background-size: 100% 5px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* Mechanical Push Button Keys */
+.te-key-btn {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  color: #3f3f46;
+  background: #ffffff;
+  border: 1.5px solid #1a1a1a;
+  box-shadow: 0 2px 0 #1a1a1a;
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.te-key-btn:hover {
+  background: #fdfdfd;
+  color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 #1a1a1a;
+}
+
+.te-key-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #1a1a1a;
+}
+
+.te-key-btn[data-active="true"] {
+  background: #1a1a1a;
+  color: #ffffff;
+  box-shadow: 0 1px 0 #000000;
+}
+
+.te-key-btn[data-active="true"] .te-led-dot {
+  background: #ff5500;
+  box-shadow: 0 0 8px #ff5500;
+}
+
+/* ── 2. Hardware Channel Selector Bar ── */
+.te-channel-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px;
+  background: #18181b;
+  border: 2px solid #09090b;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.te-rocker-btn {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  border-radius: 5px;
+  color: #71717a;
+  background: #27272a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.te-rocker-btn:hover {
+  color: #f4f4f5;
+  background: #3f3f46;
+}
+
+.te-rocker-btn.is-active {
+  color: #ffffff;
+  box-shadow: 0 0 12px currentColor, inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+[data-mode="devops"] .te-rocker-btn.is-active {
+  background: #059669;
+  border-color: #10b981;
+}
+
+[data-mode="developer"] .te-rocker-btn.is-active {
+  background: #2563eb;
+  border-color: #3b82f6;
+}
+
+[data-mode="content-creator"] .te-rocker-btn.is-active {
+  background: #ff5500;
+  border-color: #ff7733;
+}
+
+/* ── 3. The Hardware Video Console Module (Left Unit) ── */
+.te-hardware-chassis {
+  position: relative;
+  background: #f5f4ed;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+/* 4 Allen/Torx Hex Screws */
+.te-hex-screw {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #e4e4e7 0%, #71717a 100%);
+  border: 1px solid #27272a;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.6), 0 1px 1px rgba(255, 255, 255, 0.8);
+  z-index: 30;
+}
+
+.te-hex-screw::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  background: #18181b;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.te-hex-screw.top-left { top: 9px; left: 9px; }
+.te-hex-screw.top-right { top: 9px; right: 9px; }
+.te-hex-screw.bottom-left { bottom: 9px; left: 9px; }
+.te-hex-screw.bottom-right { bottom: 9px; right: 9px; }
+
+/* CRT Screen Monitor Bezel */
+.te-monitor-bezel {
+  position: relative;
+  background: #18181b;
+  border: 2px solid #09090b;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+.te-monitor-bezel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Hardware Dial Control Strip */
+.te-dial-strip {
+  background: #ebeae0;
+  border-top: 2px solid #1a1a1a;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.te-rotary-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.te-knob-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #52525b 0%, #18181b 100%);
+  border: 1.5px solid #09090b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.te-knob-circle::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 7px;
+  background: #ff5500;
+  border-radius: 1px;
+}
+
+.te-rotary-dial:hover .te-knob-circle {
+  transform: rotate(45deg);
+}
+
+.te-dial-label {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+
+/* ── 4. Architect's Field Dossier & Clipboard (Right Unit) ── */
+.field-dossier-clipboard {
+  position: relative;
+  background: #fdfdfa;
+  border: 2.5px solid #1a1a1a;
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.18), 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Top Industrial Steel Binder Clamp */
+.field-dossier-clipboard::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 18px;
+  background: linear-gradient(180deg, #d4d4d8 0%, #71717a 100%);
+  border: 2px solid #1a1a1a;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+  z-index: 25;
+}
+
+/* Inner dashed architect line */
+.field-dossier-clipboard::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(20, 20, 20, 0.25);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* 3D Embossed Dymo Tape Labels */
+.dymo-embossed-tape {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  background: #18181b;
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease;
+}
+
+.dymo-embossed-tape:hover {
+  transform: translateY(-1px);
+}
+
+.dymo-embossed-tape::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff5500;
+  box-shadow: 0 0 6px #ff5500;
+}
+
+/* Red/Amber Rubber Stamp Seal */
+.rubber-stamp-seal {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #ff5500;
+  border: 2px solid #ff5500;
+  border-radius: 4px;
+  padding: 3px 8px;
+  display: inline-block;
+  transform: rotate(-3deg);
+  opacity: 0.92;
+  box-shadow: 0 0 1px rgba(255, 85, 0, 0.3);
+}
+
+[data-mode="devops"] .rubber-stamp-seal {
+  color: #059669;
+  border-color: #059669;
+}
+
+[data-mode="developer"] .rubber-stamp-seal {
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   STYLE B + D FUSION: THE CREATIVE HARDWARE LAB & FIELD SKETCHBOOK
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Industrial Hardware + Sketch Navbar ── */
+.hardware-sketch-nav {
+  position: relative;
+  background: color-mix(in srgb, var(--color-surface) 96%, white);
+  border: 1.8px solid var(--color-line-strong);
+  border-top-width: 2.8px;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 24px -4px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+  transition:
+    max-width 0.45s ease,
+    margin-top 0.45s ease,
+    border-radius 0.45s ease,
+    box-shadow 0.45s ease,
+    background-color 0.45s ease;
+}
+
+/* Precision millimeter scale etched along the top edge */
+.hardware-sketch-nav::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 14px;
+  right: 14px;
+  height: 5px;
+  background-image:
+    repeating-linear-gradient(to right, rgba(20, 20, 20, 0.3) 0, rgba(20, 20, 20, 0.3) 1px, transparent 1px, transparent 8px),
+    repeating-linear-gradient(to right, rgba(20, 20, 20, 0.7) 0, rgba(20, 20, 20, 0.7) 1.5px, transparent 1.5px, transparent 40px);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Mechanical Button Keycaps */
+.hardware-nav-btn {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.38rem 0.75rem;
+  border-radius: 6px;
+  color: var(--color-ink-dim);
+  border: 1px solid rgba(20, 20, 20, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hardware-nav-btn:hover {
+  color: #111;
+  background: #ffffff;
+  border-color: rgba(20, 20, 20, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.hardware-nav-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.hardware-nav-btn[data-active="true"] {
+  color: #111;
+  background: #ffffff;
+  border-color: var(--color-line-strong);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Safety orange active dot indicator */
+.hardware-nav-btn[data-active="true"]::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff5500;
+  box-shadow: 0 0 6px rgba(255, 85, 0, 0.7);
+}
+
+/* ── 2. Industrial Hardware Mode Selector (Cassette / Rocker Bar) ── */
+.hardware-mode-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: #202022;
+  border: 2px solid #141416;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hardware-mode-tab {
+  position: relative;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.42rem 0.95rem;
+  border-radius: 5px;
+  color: #a1a1aa;
+  background: #27272a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.hardware-mode-tab:hover {
+  color: #fafafa;
+  background: #3f3f46;
+}
+
+.hardware-mode-tab.is-active {
+  color: #ffffff;
+  background: #ff5500;
+  border-color: #ff7733;
+  box-shadow:
+    0 0 10px rgba(255, 85, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  font-weight: 800;
+}
+
+/* Mode-specific rocker highlights */
+[data-mode="devops"] .hardware-mode-tab.is-active {
+  background: #059669;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+[data-mode="developer"] .hardware-mode-tab.is-active {
+  background: #2563eb;
+  border-color: #3b82f6;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+[data-mode="content-creator"] .hardware-mode-tab.is-active {
+  background: #ff5500;
+  border-color: #ff7733;
+  box-shadow: 0 0 10px rgba(255, 85, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* ── 3. Tactile Hardware Module Slot (Left Card) ── */
+.hardware-cassette-frame {
+  position: relative;
+  background: #fcfcf7;
+  border: 2px solid var(--color-line-strong);
+  border-radius: 12px;
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.14),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Corner Screw Fasteners */
+.screw-tl, .screw-tr, .screw-bl, .screw-br {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e4e4e7 0%, #71717a 100%);
+  border: 1px solid #3f3f46;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255, 255, 255, 0.8);
+  z-index: 20;
+}
+
+.screw-tl::after, .screw-tr::after, .screw-bl::after, .screw-br::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 1.2px;
+  background: #27272a;
+}
+
+.screw-tl { top: 8px; left: 8px; transform: rotate(25deg); }
+.screw-tr { top: 8px; right: 8px; transform: rotate(115deg); }
+.screw-bl { bottom: 8px; left: 8px; transform: rotate(70deg); }
+.screw-br { bottom: 8px; right: 8px; transform: rotate(40deg); }
+
+/* Header & Footer Hardware Bezels */
+.hardware-bezel-header {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-dim);
+  background: #f4f4ec;
+  border-bottom: 1.5px solid var(--color-line-strong);
+  padding: 6px 12px 6px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hardware-bezel-footer {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-dim);
+  background: #f4f4ec;
+  border-top: 1.5px solid var(--color-line-strong);
+  padding: 6px 12px 6px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── 4. Engineer's Field Spec Sheet (Right Card) ── */
+.field-spec-sheet {
+  position: relative;
+  background: #fdfdf9;
+  border: 2px solid var(--color-line-strong);
+  border-radius: 14px;
+  box-shadow:
+    0 22px 45px -12px rgba(0, 0, 0, 0.12),
+    0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Inner dashed pencil guide */
+.field-spec-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(20, 20, 20, 0.22);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* Rubber Stamp Status Badge */
+.rubber-stamp-badge {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ff5500;
+  border: 1.8px solid #ff5500;
+  border-radius: 4px;
+  padding: 2px 7px;
+  display: inline-block;
+  transform: rotate(-3deg);
+  opacity: 0.88;
+  box-shadow: 0 0 1px rgba(255, 85, 0, 0.3);
+}
+
+[data-mode="devops"] .rubber-stamp-badge {
+  color: #059669;
+  border-color: #059669;
+}
+
+[data-mode="developer"] .rubber-stamp-badge {
+  color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Tactile Dymo/Label-Maker Pill Tag */
+.hardware-dymo-tag {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #1a1a1a;
+  background: #f4f4eb;
+  border: 1.2px solid rgba(20, 20, 20, 0.45);
+  border-radius: 6px;
+  padding: 0.32rem 0.75rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, background 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.hardware-dymo-tag:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  border-color: #111;
+}
+
+.hardware-dymo-tag::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(20, 20, 20, 0.4);
+}
+
+
