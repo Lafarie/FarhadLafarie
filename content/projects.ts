@@ -90,27 +90,6 @@ export const PROJECTS: Project[] = [
     tags: ["devops"],
   },
   {
-    id: "ai-job-search",
-    title: "Autonomous AI Job Search Platform 2026",
-    description:
-      "Agentic job hunting platform monitoring 4 market tracks, navigating ATS portals via headless Playwright with automated Gmail 2FA OTP retrieval, and deterministically compiling tailor-made 2-page ModernCV resumes.",
-    image:
-      "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
-    link: "https://github.com/Lafarie",
-    status: "In Progress",
-    tech: [
-      "Python",
-      "Playwright",
-      "LaTeX / XeLaTeX",
-      "Gmail IMAP API",
-      "Pytest",
-      "Zsh",
-      "AI Agents",
-    ],
-    featured: true,
-    tags: ["devops", "developer", "full-stack"],
-  },
-  {
     id: "el0007-telemetry",
     title: "EL0007 USB-to-LCD Telemetry Display 2024",
     description:
@@ -146,25 +125,14 @@ export const PROJECTS: Project[] = [
     tags: ["developer", "mobile"],
   },
   {
-    id: "whatsapp-bot",
-    title: "WhatsApp Bot 2022",
+    id: "social-media-bots",
+    title: "Social Media Bots",
     description:
-      "An automated bot for WhatsApp built with Node.js for efficient message handling and automation.",
+      "Automated messaging and utility bots for WhatsApp and Telegram built with Node.js and Python for smart message parsing, scheduled notifications, and chat automation.",
     image:
-      "https://play-lh.googleusercontent.com/MWV1erZURmTaeXGj29ZLWMSo_7DB92q3IL71lDSRooqbb3qidsa4c9DJ0_jEQgOeXEQ=w416-h235-rw",
+      "https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=800&q=80",
     status: "Completed",
-    tech: ["Node.js", "JavaScript"],
-    tags: ["developer"],
-  },
-  {
-    id: "telegram-bot",
-    title: "Telegram Bot 2022",
-    description:
-      "An automated bot for Telegram built with Python for smart message processing.",
-    image:
-      "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/08/1-1.webp?ssl=1&quality=80&w=f",
-    status: "Completed",
-    tech: ["Python", "Telegram API"],
+    tech: ["Node.js", "Python", "WhatsApp API", "Telegram API", "Automation"],
     tags: ["developer"],
   },
   {
