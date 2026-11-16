@@ -130,8 +130,7 @@ export default function Navbar() {
       tl.to(
         nav,
         {
-          maxWidth: "min(88vw, 880px)",
-          marginTop: 10,
+          maxWidth: "min(94vw, 1080px)",
           borderRadius: "12px",
           boxShadow: "0 12px 30px -6px rgba(0, 0, 0, 0.2)",
           ease: "none",
@@ -146,11 +145,11 @@ export default function Navbar() {
 
   return (
     <>
-      <header ref={shellRef} className="pointer-events-none fixed inset-x-0 top-0 z-50 print:hidden">
+      <header ref={shellRef} className="pointer-events-none fixed inset-x-0 top-0 z-50 print:hidden pt-2 sm:pt-3 px-3 sm:px-4">
         <nav ref={navRef} className="te-navbar-rack pointer-events-auto mx-auto w-full max-w-6xl">
           {/* Laser-Etched Metric Scale Bar */}
           <div
-            className="te-ruler-scale hidden md:flex items-center justify-between px-4 py-0.5 font-mono text-[8px] font-bold tracking-[0.16em] text-zinc-500 select-none"
+            className="te-ruler-scale hidden md:flex items-center justify-between px-4 py-0.5 font-mono text-[8px] font-bold tracking-[0.16em] text-zinc-500 select-none overflow-hidden whitespace-nowrap"
             aria-hidden="true"
           >
             <span>00MM</span>
@@ -166,13 +165,13 @@ export default function Navbar() {
             <span>100MM</span>
           </div>
 
-          <div className="relative mx-auto flex items-center justify-between px-3 py-2 sm:px-4 sm:py-2.5">
+          <div className="relative mx-auto flex items-center justify-between px-3 py-2 sm:px-4 sm:py-2.5 gap-2">
             <Link
               href="/"
-              className="inline-flex items-center gap-2.5 group"
+              className="inline-flex items-center gap-2.5 group shrink-0"
               style={{ color: "#1a1a1a", textDecoration: "none" }}
             >
-              <span className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border-2 border-zinc-900 bg-white shadow-xs">
+              <span className="inline-flex h-7 w-7 items-center justify-center overflow-hidden rounded-md border-2 border-zinc-900 bg-white shadow-xs shrink-0">
                 <Image
                   src="/logo.png"
                   alt="Farhad Lafarie"
@@ -181,50 +180,50 @@ export default function Navbar() {
                   className="h-7 w-7 object-cover"
                 />
               </span>
-              <div className="flex flex-col">
-                <span className="font-mono text-xs font-black tracking-wider text-zinc-900 flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+              <div className="flex flex-col shrink-0">
+                <span className="font-mono text-xs font-black tracking-wider text-zinc-900 flex items-center gap-1.5 whitespace-nowrap">
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse shrink-0" />
                   FARHAD LAFARIE
                 </span>
-                <span className="font-mono text-[9px] font-semibold tracking-widest text-zinc-500 uppercase">
+                <span className="font-mono text-[9px] font-semibold tracking-widest text-zinc-500 uppercase whitespace-nowrap">
                   TE-FL // REV.2026
                 </span>
               </div>
             </Link>
 
-            <div className="hidden items-center gap-2 md:flex">
-              <ul className="flex items-center gap-1.5">
+            <div className="hidden items-center gap-2 md:flex shrink-0">
+              <ul className="flex items-center gap-1.5 flex-nowrap shrink-0">
                 {SITE.nav.map((item, index) => (
-                  <li key={item.id}>
+                  <li key={item.id} className="shrink-0">
                     <a
                       href={item.href}
                       onClick={handleNav(item.id)}
                       data-active={activeSection === item.id ? "true" : undefined}
-                      className="te-key-btn uppercase"
+                      className="te-key-btn uppercase whitespace-nowrap"
                     >
-                      <span className="te-led-dot inline-block h-1.5 w-1.5 rounded-full bg-zinc-300 transition-colors" />
-                      {String(index + 1).padStart(2, "0")} : {item.label}
+                      <span className="te-led-dot inline-block h-1.5 w-1.5 rounded-full bg-zinc-300 transition-colors shrink-0" />
+                      <span>{String(index + 1).padStart(2, "0")} : {item.label}</span>
                     </a>
                   </li>
                 ))}
-                <li>
+                <li className="shrink-0">
                   <button
                     type="button"
                     onClick={openCv}
-                    className="te-key-btn uppercase font-extrabold text-orange-600 hover:text-orange-500"
+                    className="te-key-btn uppercase font-extrabold text-orange-600 hover:text-orange-500 whitespace-nowrap"
                   >
-                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-orange-500" />
-                    04 : CV
+                    <span className="inline-block h-1.5 w-1.5 rounded-full bg-orange-500 shrink-0" />
+                    <span>04 : CV</span>
                   </button>
                 </li>
               </ul>
 
-              <div className="hidden lg:flex items-center pl-2.5 border-l border-zinc-300 gap-2">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9.5px] font-mono tracking-wider text-zinc-700 border border-zinc-300 bg-zinc-100 font-bold">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="hidden xl:flex items-center pl-2.5 border-l border-zinc-300 gap-2 shrink-0">
+                <span className="inline-flex items-center gap-1 px-2 py-1 rounded text-[9.5px] font-mono tracking-wider text-zinc-700 border border-zinc-300 bg-zinc-100 font-bold whitespace-nowrap shrink-0 leading-none">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   SYS: LIVE
                 </span>
-                <span className="text-[9.5px] font-mono text-zinc-500 font-semibold hidden xl:inline">
+                <span className="text-[9.5px] font-mono text-zinc-500 font-semibold whitespace-nowrap shrink-0 leading-none hidden 2xl:inline">
                   48kHz / 24-BIT
                 </span>
               </div>

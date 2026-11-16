@@ -90,6 +90,39 @@ export const PROJECTS: Project[] = [
     tags: ["devops"],
   },
   {
+    id: "ai-job-search",
+    title: "Autonomous AI Job Search Platform 2026",
+    description:
+      "Agentic job hunting platform monitoring 4 market tracks, navigating ATS portals via headless Playwright with automated Gmail 2FA OTP retrieval, and deterministically compiling tailor-made 2-page ModernCV resumes.",
+    image:
+      "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80",
+    link: "https://github.com/Lafarie",
+    status: "In Progress",
+    tech: [
+      "Python",
+      "Playwright",
+      "LaTeX / XeLaTeX",
+      "Gmail IMAP API",
+      "Pytest",
+      "Zsh",
+      "AI Agents",
+    ],
+    featured: true,
+    tags: ["devops", "developer", "full-stack"],
+  },
+  {
+    id: "el0007-telemetry",
+    title: "EL0007 USB-to-LCD Telemetry Display 2024",
+    description:
+      "Low-level Python serial driver and telemetry daemon communicating with an EL0007 controller to render real-time CPU core loads, RAM consumption, thermals, and network throughput onto a physical HD44780 LCD display.",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    link: "https://github.com/Lafarie/el0007-USB-to-LCD",
+    status: "Completed",
+    tech: ["Python", "PySerial", "Linux", "EL0007 USB", "HD44780 LCD", "Hardware Telemetry"],
+    tags: ["devops", "developer"],
+  },
+  {
     id: "aiducator",
     title: "AIducator 2024",
     description:
@@ -159,15 +192,43 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "fort-siege",
-    title: "Fort Siege",
+    title: "Fort Siege 2026",
     description:
-      "Multiplayer tactical artillery siege game built in Unity with browser WebGL deployment on Vercel, real-time networking, and destructible defense mechanics.",
+      "2D real-time multiplayer artillery combat game built in Unity WebGL & WebAssembly with WebRTC/MQTT sub-second synchronization, ballistics physics, dynamic wind resistance, and procedural destructible terrain.",
     image:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80",
     link: "https://fort-siege.vercel.app/",
     status: "Completed",
-    tech: ["Unity", "C#", "WebGL", "Vercel", "Multiplayer"],
+    tech: [
+      "Unity",
+      "C#",
+      "WebGL",
+      "WebAssembly (Wasm)",
+      "WebSockets",
+      "MQTT",
+      "WebRTC",
+      "Vercel",
+    ],
     tags: ["developer", "game-dev", "full-stack"],
+  },
+  {
+    id: "project-x",
+    title: "Project X (3D Vehicle Physics & Track Generator)",
+    description:
+      "Modular 3D vehicle dynamics sandbox and procedural racetrack generation toolkit built under FORGE-SL. Custom Rigidbody vehicle physics, tire slip curves, dynamic camera damping, procedural spline track builder, and custom HLSL shaders.",
+    image:
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80",
+    link: "https://github.com/FORGE-SL/projet-x",
+    status: "In Progress",
+    tech: [
+      "Unity 3D",
+      "C#",
+      "HLSL",
+      "Universal Render Pipeline (URP)",
+      "Blender",
+      "Procedural Generation",
+    ],
+    tags: ["developer", "game-dev"],
   },
   {
     id: "levelstair-punisher",

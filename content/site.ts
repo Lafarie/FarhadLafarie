@@ -33,7 +33,7 @@ export const SITE: SiteContent = {
       "I'm a passionate developer with a focus on creating engaging and efficient user experiences. With a background in Software Engineering and a keen eye for design, I specialize in developing responsive, high-performing websites and applications using the latest web technologies.",
   },
   stats: {
-    projects: 14,
+    projects: PROJECTS.length,
     languages: 15,
     years: 3,
     clients: 5,

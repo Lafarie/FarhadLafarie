@@ -525,12 +525,15 @@
 /* ── 1. Industrial Hardware Rack Navbar ── */
 .te-navbar-rack {
   position: relative;
-  background: #f7f6f0;
+  background: rgba(247, 246, 240, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 2px solid #1a1a1a;
   border-top-width: 3px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.14), 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: max-width 0.4s ease, margin-top 0.4s ease, border-radius 0.4s ease;
+  overflow: hidden;
 }
 
 /* Precision etched ruler scale */
@@ -543,15 +546,18 @@
   background-size: 100% 5px;
   background-repeat: no-repeat;
   background-position: bottom;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* Mechanical Push Button Keys */
 .te-key-btn {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 0.4rem 0.8rem;
+  letter-spacing: 0.06em;
+  height: 32px;
+  padding: 0 0.65rem;
   border-radius: 6px;
   color: #3f3f46;
   background: #ffffff;
@@ -562,6 +568,10 @@
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+  user-select: none;
 }
 
 .te-key-btn:hover {
