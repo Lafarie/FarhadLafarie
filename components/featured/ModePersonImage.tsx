@@ -1,15 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Play, Pause, Settings } from "lucide-react";
 import { useVibe } from "@/context/VibeContext";
 import { VibeSettingsModal } from "@/components/ui/VibeSettingsModal";
 import { cn } from "@/lib/utils";
 
+const BAR_HEIGHTS = [5, 8, 11, 14, 18];
+
 export function ModePersonImage() {
   const [knobRotations, setKnobRotations] = useState([25, 70, 110]);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [signalBars, setSignalBars] = useState(5);
   const { isPlaying, toggle } = useVibe();
+
+  useEffect(() => {
+    // Mobile signal strength sequence:
+    // Holds at full (5 bars) for 3.4s -> dips to 4 (450ms) -> dips to 3 (450ms) -> holds at low (2 bars) for 2s -> recovers to 3 (450ms) -> 4 (450ms) -> back to 5
+    const sequence = [
+      { bars: 5, duration: 3400 },
+      { bars: 4, duration: 450 },
+      { bars: 3, duration: 450 },
+      { bars: 2, duration: 2000 },
+      { bars: 3, duration: 450 },
+      { bars: 4, duration: 450 },
+    ];
+    let step = 0;
+    let timer: NodeJS.Timeout;
+
+    const tick = () => {
+      setSignalBars(sequence[step].bars);
+      timer = setTimeout(() => {
+        step = (step + 1) % sequence.length;
+        tick();
+      }, sequence[step].duration);
+    };
+
+    tick();
+    return () => clearTimeout(timer);
+  }, []);
+
+  const activeBars = isPlaying ? 5 : signalBars;
 
   const rotateKnob = (index: number) => {
     setKnobRotations((prev) => {
@@ -174,27 +205,44 @@ export function ModePersonImage() {
           </button>
         </div>
 
-        {/* Right: Audio / Kinetic Signal Level VU Meter */}
+        {/* Right: Cellular Mobile Signal Strength Meter */}
         <div
-          className={cn(
-            "flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group",
-            isPlaying && "is-vibe-active"
-          )}
+          className="flex items-center gap-2 cursor-pointer pl-2.5 border-l border-zinc-400/80 group"
           onClick={toggle}
-          title={isPlaying ? "Click to calm signal" : "Click to boost signal"}
+          title={isPlaying ? "Signal Locked to 5G Boost (Click to calm)" : "Click to boost signal"}
         >
-          <div className="flex gap-0.5 h-5 items-end" aria-label="Signal level meter">
-            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-1" />
-            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-2" />
-            <span className="w-1.5 rounded-2xs bg-emerald-500 te-signal-bar-3" />
-            <span className="w-1.5 rounded-2xs bg-yellow-400 te-signal-bar-4" />
-            <span className="w-1.5 rounded-2xs bg-orange-500 te-signal-bar-5" />
-            <span className="w-1.5 rounded-2xs bg-red-500 te-signal-bar-6" />
+          <div className="flex gap-[2px] h-5 items-end" aria-label="Mobile signal strength">
+            {BAR_HEIGHTS.map((h, i) => {
+              const isLit = i + 1 <= activeBars;
+              return (
+                <span
+                  key={i}
+                  style={{ height: `${h}px` }}
+                  className={cn(
+                    "w-[3.5px] rounded-[1px] transition-all duration-300",
+                    isLit
+                      ? "bg-emerald-500 shadow-[0_0_3px_rgba(16,185,129,0.5)] opacity-100"
+                      : "bg-zinc-300/80 border border-zinc-400/30 opacity-35"
+                  )}
+                />
+              );
+            })}
           </div>
           <div className="flex flex-col text-left">
-            <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px]">SIGNAL</span>
-            <span className={cn("font-mono text-[7px] font-bold leading-none mt-0.5", isPlaying ? "text-emerald-600 font-extrabold" : "text-zinc-500")}>
-              {isPlaying ? "48 FPS" : "ONLINE"}
+            <span className="te-dial-label text-zinc-900 font-extrabold leading-none text-[8.5px]">
+              SIGNAL
+            </span>
+            <span
+              className={cn(
+                "font-mono text-[7px] font-bold leading-none mt-0.5 transition-colors duration-300",
+                activeBars >= 4 ? "text-emerald-600 font-extrabold" : "text-amber-600 font-bold"
+              )}
+            >
+              {isPlaying
+                ? "5G // BOOST"
+                : activeBars >= 4
+                  ? "5G // FULL"
+                  : "4G // FAIR"}
             </span>
           </div>
         </div>

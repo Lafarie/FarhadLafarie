@@ -846,68 +846,10 @@
   box-shadow: 0 0 0 #1a1a1a;
 }
 
-/* Dynamic Up-and-Down Signal Wave Keyframes */
-@keyframes signalWave1 {
-  0%, 100% { height: 5px; opacity: 0.65; }
-  50% { height: 12px; opacity: 1; }
+/* Mobile Signal Strength Indicator */
+.te-signal-bar {
+  transition: opacity 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
 }
-
-@keyframes signalWave2 {
-  0%, 100% { height: 7px; opacity: 0.7; }
-  50% { height: 15px; opacity: 1; }
-}
-
-@keyframes signalWave3 {
-  0%, 100% { height: 9px; opacity: 0.75; }
-  50% { height: 18px; opacity: 1; }
-}
-
-@keyframes signalWave4 {
-  0%, 100% { height: 6px; opacity: 0.6; }
-  50% { height: 14px; opacity: 0.95; }
-}
-
-@keyframes signalWave5 {
-  0%, 100% { height: 4px; opacity: 0.5; }
-  50% { height: 11px; opacity: 0.9; }
-}
-
-@keyframes signalWave6 {
-  0%, 100% { height: 3px; opacity: 0.4; }
-  50% { height: 8px; opacity: 0.85; }
-}
-
-.te-signal-bar-1 {
-  animation: signalWave1 1.2s ease-in-out infinite;
-}
-.te-signal-bar-2 {
-  animation: signalWave2 1.2s ease-in-out infinite;
-  animation-delay: 0.12s;
-}
-.te-signal-bar-3 {
-  animation: signalWave3 1.2s ease-in-out infinite;
-  animation-delay: 0.24s;
-}
-.te-signal-bar-4 {
-  animation: signalWave4 1.2s ease-in-out infinite;
-  animation-delay: 0.36s;
-}
-.te-signal-bar-5 {
-  animation: signalWave5 1.2s ease-in-out infinite;
-  animation-delay: 0.48s;
-}
-.te-signal-bar-6 {
-  animation: signalWave6 1.2s ease-in-out infinite;
-  animation-delay: 0.6s;
-}
-
-/* Fast energetic wave when Vibe is engaged */
-.is-vibe-active .te-signal-bar-1 { animation: signalWave1 0.48s ease-in-out infinite; }
-.is-vibe-active .te-signal-bar-2 { animation: signalWave2 0.48s ease-in-out infinite; animation-delay: 0.06s; }
-.is-vibe-active .te-signal-bar-3 { animation: signalWave3 0.48s ease-in-out infinite; animation-delay: 0.12s; }
-.is-vibe-active .te-signal-bar-4 { animation: signalWave4 0.48s ease-in-out infinite; animation-delay: 0.18s; }
-.is-vibe-active .te-signal-bar-5 { animation: signalWave5 0.48s ease-in-out infinite; animation-delay: 0.24s; }
-.is-vibe-active .te-signal-bar-6 { animation: signalWave6 0.48s ease-in-out infinite; animation-delay: 0.3s; }
 
 /* ── 4. Architect's Field Dossier & Clipboard (Right Unit) ── */
 .field-dossier-clipboard {
