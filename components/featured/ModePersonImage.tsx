@@ -58,7 +58,7 @@ export function ModePersonImage() {
       <span className="te-hex-screw bottom-right" aria-hidden="true" />
 
       {/* Top Silkscreen Hardware Bezel */}
-      <div className="flex items-center justify-between px-6 py-1.5 bg-zinc-200/90 border-b-2 border-zinc-900 font-mono text-[9px] font-black tracking-widest text-zinc-700 uppercase">
+      <div className="flex items-center justify-between px-7 py-2 bg-zinc-200/90 border-b-2 border-zinc-900 font-mono text-[9.5px] font-black tracking-widest text-zinc-700 uppercase">
         <span className="flex items-center gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
           SYS_ID: TE-FL01
@@ -67,44 +67,44 @@ export function ModePersonImage() {
       </div>
 
       {/* Ventilation Cooling Slits */}
-      <div className="flex justify-center gap-1.5 py-1 bg-zinc-300/40 border-b border-zinc-900/20" aria-hidden="true">
-        <span className="w-5 h-0.5 rounded-full bg-zinc-400" />
-        <span className="w-5 h-0.5 rounded-full bg-zinc-400" />
-        <span className="w-5 h-0.5 rounded-full bg-zinc-400" />
-        <span className="w-5 h-0.5 rounded-full bg-zinc-400" />
-        <span className="w-5 h-0.5 rounded-full bg-zinc-400" />
+      <div className="flex justify-center gap-2 py-1.5 bg-zinc-300/40 border-b border-zinc-900/20" aria-hidden="true">
+        <span className="w-6 h-0.5 rounded-full bg-zinc-400" />
+        <span className="w-6 h-0.5 rounded-full bg-zinc-400" />
+        <span className="w-6 h-0.5 rounded-full bg-zinc-400" />
+        <span className="w-6 h-0.5 rounded-full bg-zinc-400" />
+        <span className="w-6 h-0.5 rounded-full bg-zinc-400" />
       </div>
 
       {/* CRT Terminal Screen */}
-      <div className="p-2 bg-zinc-900">
+      <div className="p-3 bg-zinc-900">
         <div
-          className="te-monitor-bezel relative w-full overflow-hidden p-3 font-mono text-[10px] leading-relaxed text-zinc-300 bg-zinc-950 flex flex-col justify-between"
-          style={{ aspectRatio: "4/4.7" }}
+          className="te-monitor-bezel relative w-full overflow-hidden p-4 sm:p-5 font-mono text-zinc-300 bg-zinc-950 flex flex-col justify-between"
+          style={{ aspectRatio: "4/4.8" }}
         >
           {/* Header line inside CRT */}
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-1.5 text-[8.5px] text-zinc-500">
-            <span className="text-emerald-400 font-bold flex items-center gap-1">
+          <div className="flex items-center justify-between border-b border-zinc-800 pb-2 text-[10px] text-zinc-400">
+            <span className="text-emerald-400 font-bold flex items-center gap-1.5 text-xs">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
               CONSOLE_ROOT // TTY-01
             </span>
-            <span>PROD_ENV</span>
+            <span className="font-semibold text-zinc-400">PROD_ENV</span>
           </div>
 
-          {/* Terminal readouts */}
-          <div className="space-y-1.5 py-1.5 text-[9px]">
+          {/* Terminal readouts - fills blank space evenly */}
+          <div className="flex-1 flex flex-col justify-between py-2.5 space-y-3">
             <div>
-              <span className="text-orange-400 font-bold">$ whoami</span>
-              <p className="text-white font-extrabold text-[10.5px] tracking-wide mt-0.5">
+              <span className="text-orange-400 font-extrabold text-xs">$ whoami</span>
+              <p className="text-white font-black text-base sm:text-[17px] tracking-wide mt-0.5">
                 FARHAD LAFARIE
               </p>
-              <p className="text-zinc-400 text-[8px]">
+              <p className="text-zinc-300 text-[11px] font-semibold mt-0.5">
                 Full-Stack Engineer &amp; DevOps Specialist
               </p>
             </div>
 
-            <div className="border-t border-zinc-900 pt-1">
-              <span className="text-cyan-400 font-bold">$ cat /etc/stack.conf</span>
-              <div className="grid grid-cols-2 gap-1 text-[7.5px] text-zinc-400 mt-0.5">
+            <div className="border-t border-zinc-900 pt-2.5">
+              <span className="text-cyan-400 font-extrabold text-xs">$ cat /etc/stack.conf</span>
+              <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 text-[10px] sm:text-[11px] text-zinc-200 mt-1 font-semibold">
                 <div>[INFRA] Docker·K8s·AWS</div>
                 <div>[CORE] Next.js·React 19</div>
                 <div>[CI/CD] GitLab·Actions</div>
@@ -112,27 +112,26 @@ export function ModePersonImage() {
               </div>
             </div>
 
-            <div className="border-t border-zinc-900 pt-1">
-              <span className="text-emerald-400 font-bold">$ healthcheck --infra</span>
-              <p className="text-emerald-400 font-semibold text-[7.5px]">
-                ✔ CI/CD AUTOMATION [100%]
-              </p>
-              <p className="text-emerald-400 font-semibold text-[7.5px]">
-                ✔ 14+ PROJECTS [DEPLOYED]
-              </p>
+            <div className="border-t border-zinc-900 pt-2.5">
+              <span className="text-emerald-400 font-extrabold text-xs">$ healthcheck --infra</span>
+              <div className="space-y-1 mt-1 text-[10px] sm:text-[11px] font-bold text-emerald-400">
+                <p>✔ CI/CD AUTOMATION [100% HEALTHY]</p>
+                <p>✔ 14+ SYSTEMS [DEPLOYED // LIVE]</p>
+                <p>✔ TELEMETRY [LATENCY OPTIMAL]</p>
+              </div>
             </div>
           </div>
 
           {/* Prompt line with cursor */}
-          <div className="flex items-center gap-1 text-emerald-400 border-t border-zinc-800/80 pt-1.5 text-[9px]">
-            <span className="font-bold">fl@workstation:~$</span>
-            <span className="animate-pulse font-extrabold">█</span>
+          <div className="flex items-center gap-1.5 text-emerald-400 border-t border-zinc-800 pt-2.5 text-xs font-extrabold">
+            <span>fl@workstation:~$</span>
+            <span className="animate-pulse font-black text-sm">█</span>
           </div>
         </div>
       </div>
 
       {/* Tactile Hardware Rotary Dial Strip */}
-      <div className="te-dial-strip px-6 py-2">
+      <div className="te-dial-strip px-7 py-2.5">
         <div
           className="te-rotary-dial"
           onClick={() => rotateKnob(0)}
@@ -169,7 +168,7 @@ export function ModePersonImage() {
       </div>
 
       {/* Hardware Master Transport Deck: Vibe Controls + Signal VU Meter */}
-      <div className="te-transport-deck flex items-center justify-between px-5 py-2 border-t-2 border-zinc-900 select-none">
+      <div className="te-transport-deck flex items-center justify-between px-6 py-2.5 border-t-2 border-zinc-900 select-none">
         {/* Left: Tactile Vibe Controls */}
         <div className="flex items-center gap-1.5">
           <button

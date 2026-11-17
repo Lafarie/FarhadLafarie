@@ -35,7 +35,7 @@ export function FeaturedSection() {
           {/* Side-by-side on lg+, stacked on mobile */}
           <div className="flex w-full flex-col items-center gap-8 lg:flex-row lg:items-stretch lg:gap-8">
             {/* Left Column: Teenage Engineering Hardware System Console */}
-            <div className="w-full max-w-[280px] shrink-0 sm:max-w-[300px] lg:w-[285px] lg:max-w-none xl:w-[315px]">
+            <div className="w-full max-w-[340px] shrink-0 sm:max-w-[360px] lg:w-[340px] lg:max-w-none xl:w-[380px]">
               <ModePersonImage />
             </div>
 
